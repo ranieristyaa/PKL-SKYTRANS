@@ -153,10 +153,19 @@
                 
           </li>
           
+          
 
 
         </ul>
-        
+        <li class="nav-item">
+          <a href="/superadmin/proyek" class="nav-link">
+              <i class="nav-icon fas fa-ellipsis-h"></i>
+              <p>
+              Proyek Migas
+                
+              </p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -355,7 +364,7 @@
             </div>
                   </div>
                   <div class="col-lg-4">
-                  <div class="card">
+                  <div class="shadow-lg card">
               <div class="card-header border-0" style="background-color: gray; color: white;">
                 <h3 class="card-title">Overview Stock Migas</h3>
 
@@ -422,7 +431,7 @@
       <div class="col-lg-4">
       <div class="card">
 <div class="card-header">
-<h3 class="card-title">Log Data Barang</h3>
+<h3 class="card-title">Log Aktivitas</h3>
 <div class="card-tools">
 
 </div>
@@ -456,7 +465,7 @@ $en = json_decode($d->properties);
 </div>
 
 <div class="card-footer text-center" style="display: block;">
-<a href="javascript:void(0)" class="uppercase">Lihat Semua Log</a>
+<a href="/superadmin/log" class="uppercase">Lihat Semua Log</a>
 </div>
 
 </div>

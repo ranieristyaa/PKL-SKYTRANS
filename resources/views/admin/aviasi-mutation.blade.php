@@ -10,7 +10,7 @@
 -->
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-  @include('layouts.admin-navbar')
+  @include('layouts.admin2-navbar')
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-blue elevation-4" style="background-color: #0A2647 ;">
@@ -41,7 +41,7 @@
                with font-awesome or any other icon font library -->
           
           <li class="nav-item">
-            <a href="/superadmin/home" class="nav-link">
+            <a href="/admin/home" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Dashboard
@@ -50,7 +50,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/superadmin/dataadmin" class="nav-link">
+            <a href="/admin/dataadmin" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
               Manajemen Akun
@@ -68,13 +68,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item ">
-                <a href="/superadmin/mutasi/migas" class="nav-link" >
+                <a href="/admin/stock/aviasi" class="nav-link" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/superadmin/stock/migas" class="nav-link">
+                <a href="/admin/stock/migas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas</p>
                 </a>
@@ -83,7 +83,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="/superadmin/rental" class="nav-link">
+            <a href="/admin/rental" class="nav-link">
               <i class="nav-icon fas fa-clipboard-list"></i>
               <p>
                 Data Peminjaman Aviasi
@@ -101,13 +101,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/superadmin/pembelian/aviasi" class="nav-link">
+                <a href="/admin/pembelian/aviasi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/superadmin/pembelian/migas" class="nav-link">
+                <a href="/admin/pembelian/migas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas
                  
@@ -131,13 +131,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/superadmin/mutasi/aviasi" class="nav-link " >
+                <a href="/admin/mutasi/aviasi" class="nav-link active" style="background-color: #9cc5f0;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/superadmin/mutasi/migas" class="nav-link active" style="background-color: #9cc5f0;">
+                <a href="/admin/mutasi/migas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas
              
@@ -147,7 +147,7 @@
                
           </li>
           </ul>
-          
+         
 
 
 
@@ -167,13 +167,13 @@
           <div class="col-sm-6">
           <h1>
           <i class="fas fa-exchange-alt"></i>
-            <span>Data Mutasi Barang Migas</span></h1>
+            <span>Data Mutasi Barang Aviasi</span></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
               <li class="breadcrumb-item">Data Mutasi Barang</li>
-              <li class="breadcrumb-item active">Migas</li>
+              <li class="breadcrumb-item active">Aviasi</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -259,7 +259,7 @@
                                           <div class="modal-footer">
                                               <button type="button" class="btn btn-light btn-sm"
                                                   data-dismiss="modal">Batal</button>
-                                              <form action="/superadmin/mutasi/migas/{{ $d->id }}" method="post"
+                                              <form action="/admin/mutasi/aviasi/{{ $d->id }}" method="post"
                                                   class="d-inline">
                                                   @method('delete')
                                                   @csrf
@@ -276,14 +276,14 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="titleModalLabel">Edit Data Mutasi Barang Migas</h5>
+                                    <h5 class="modal-title" id="titleModalLabel">Edit Data Mutasi Barang Aviasi</h5>
                                     <button type="button" class="close" data-dismiss="modal"
                                                                   aria-label="Close">
                                                                   <span aria-hidden="true">&times;</span>
                                                               </button>
                                 </div>
                                 <div class="modal-body">
-                            <form action="/superadmin/mutasi/migas/{{ $d->id }}" name="modal_popup" enctype="multipart/form-data" method="post">
+                            <form action="/admin/mutasi/aviasi/{{ $d->id }}" name="modal_popup" enctype="multipart/form-data" method="post">
                                     @method('PUT')
                                     @csrf
                                     <div class="form-group"  
@@ -299,9 +299,9 @@
                                     </div>
                                     <div class="form-group" 
                                     @error('name') style="border: 1px solid rgb(255, 0, 0)" @enderror>
-                                      <label for="name"><span class="fas fa-user"></span> Nama Barang</label>
+                                      <label for="name"><span class="fas fa-box"></span> Nama Barang</label>
                                       <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama barang" 
-                                      value= "{{ old('name') !== null ?  old('name') : "$d->name" }}" required>
+                                      value= "{{ old('name') !== null ?  old('name') : "$d->name" }}" disabled>
                                       <span class="text-danger">
                                         @error('name')
                                           {{ $message }}
@@ -323,7 +323,7 @@
                                     <div class="form-group"
                                     @error('item_in') style="border: 1px solid rgb(255, 0, 0)" @enderror>
                                       <label for="item_in"><span class="fas fa-calculator"></span> Jumlah</label>
-                                      <input type="number"  class="form-control" id="item_in" name="item_in" placeholder="Masukkan jumlah" 
+                                      <input type="number" min="1"  class="form-control" id="item_in" name="item_in" placeholder="Masukkan jumlah" 
                                       value= {{ old('item_in') !== null ?  old('item_in') : "$d->item_in" }} required>
                                       <span class="text-danger">
                                         @error('item_in')
@@ -334,7 +334,7 @@
                                     <div class="form-group"
                                     @error('item_out') style="border: 1px solid rgb(255, 0, 0)" @enderror>
                                       <label for="item_out"><span class="fas fa-calculator"></span> Jumlah</label>
-                                      <input type="number"  class="form-control" id="item_out" name="item_out" placeholder="Masukkan jumlah" 
+                                      <input type="number"  min="1"   class="form-control" id="item_out" name="item_out" placeholder="Masukkan jumlah" 
                                       value= {{ old('item_out') !== null ?  old('item_out') : "$d->item_out" }} required>
                                       <span class="text-danger">
                                         @error('item_out')
@@ -342,10 +342,9 @@
                                         @enderror
                                       </span>
                                     </div>
-                                    
                                   
-                                    <small><p>Dengan mengedit data, data pembelian barang terkait dan jumlah stock barang akan terupdate.</p></small>
-                            
+                          
+                              <small><p>Dengan mengedit data, data pembelian barang terkait dan jumlah stock barang akan terupdate.</p></small>
                               <div class="modal-footer">
                                 <button class="btn btn-success" type="submit">
                                   Save
@@ -381,7 +380,87 @@
         </div>
         
             <!-- Modal Add -->
-   
+    <div class="modal fade" id="ModalAdd" tabindex="-1" aria-labelledby="titleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titleModalLabel">Tambah Barang Mutasi Aviasi</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                                                  aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                </div>
+                <div class="modal-body">
+						<form action="/admin/mutasi/aviasi" name="modal_popup" enctype="multipart/form-data" method="post">
+                    @csrf
+                    <div class="form-group"  
+                    @error('date') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                      <label for="date"><span class="fas fa-pencil-alt"></span> Tanggal</label>
+                      <input type="date" class="form-control" id="date" name="date" placeholder="Masukkan Tanggal" value="{{ old('date') }}" required>
+                      <span class="text-danger">
+                        @error('')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                    <div class="form-group" 
+                    @error('name') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                      <label for="name"><span class="fas fa-box"></span> Nama Barang</label>
+                      <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama barang" value="{{ old('name') }}" required>
+                      <span class="text-danger">
+                        @error('name')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                    <div class="form-group"  
+                    @error('description') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                      <label for="description"><span class="fas fa-pencil-alt"></span> Keterangan</label>
+                      <input type="description" class="form-control" id="description" name="description" placeholder="Masukkan keterangan" value="{{ old('description') }}" >
+                      <span class="text-danger">
+                        @error('description')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+          
+                    <div class="form-group"
+                    @error('item_in') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                      <label for="item_in"><span class="fas fa-calculator"></span> Jumlah Barang Masuk</label>
+                      <input type="number"  class="form-control" id="item_in" name="item_in" placeholder="Masukkan jumlah" value="{{ old('item_in') }}" required >
+                      <span class="text-danger">
+                        @error('item_in')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                    <div class="form-group"
+                    @error('item_out') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                      <label for="item_out"><span class="fas fa-calculator"></span> Jumlah Barang Keluar</label>
+                      <input type="number"  class="form-control" id="item_out" name="item_out" placeholder="Masukkan jumlah" value="{{ old('item_out') }}" required >
+                      <span class="text-danger">
+                        @error('item_out')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                    
+                  
+              <small><p>Dengan menambahkan data, jumlah stock barang terkait akan terupdate.</p></small>
+						
+							<div class="modal-footer">
+								<button class="btn btn-success" type="submit">
+									Add
+								</button>
+								<button type="reset" class="btn btn-danger"  data-dismiss="modal" aria-hidden="true">
+									Cancel
+								</button>
+							</div>
+						</form>
+					</div>
+            </div>
+        </div>
+    </div>
 
  
 </div>
@@ -401,7 +480,7 @@
 <!-- Page specific script -->
 @section('script')
 <script>
-   $("document").ready(function () {
+  $("document").ready(function () {
       $("#example1").DataTable({
         "searching": true,
         "responsive": true, "lengthChange": false, "autoWidth": false,
@@ -414,7 +493,7 @@
           buttons: [
             {
             extend: 'print',
-            title: 'Migas Mutations',
+            title: 'Aviasi Mutations',
               text: '<span><i class="fas fa-print"></i></span>  Print',
               exportOptions: {
                 columns: [0, 1, 2, 3, 4, 5]
@@ -423,7 +502,7 @@
           {
               extend: 'excel',
               
-              title: 'Migas Mutations',
+              title: 'Aviasi Mutations',
               text: '<span><i class="fas fa-download"></i></span>  Download as Excel',
               exportOptions: {
                 columns: [0, 1, 2, 3, 4, 5]
@@ -495,6 +574,8 @@
       toastr.error("{{ session('error') }}")
     @endif
   });
+
+  
 </script>
 @if(isset($d))
   @for ($i = 0; $i <= $d->id; $i++)

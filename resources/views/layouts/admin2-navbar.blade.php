@@ -28,7 +28,7 @@
             <!-- Message End -->
           </a>
           <div class="dropdown-divider"></div>
-         <center><a class="dropdown-item dropdown-footer" href="/superadmin/log" style="color: blue;"><i class="nav-icon fas fa-history" ></i> Log Aktivitas</a></center> 
+         <center><a class="dropdown-item dropdown-footer" href="/admin/log" style="color: blue;"><i class="nav-icon fas fa-history" ></i> Log Aktivitas</a></center> 
           <div class="dropdown-divider"></div>
           <form method="POST" action="{{ route('logout') }}">
           @csrf

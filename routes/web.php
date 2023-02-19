@@ -15,6 +15,14 @@ use App\Http\Controllers\DataMgMutationController;
 use App\Http\Controllers\DataAvRentalController;
 use App\Http\Controllers\DataAvPurchaseController;
 use App\Http\Controllers\DataMgPurchaseController;
+use App\Http\Controllers\LogAktivitasController;
+use App\Http\Controllers\DataAvRentalAdminController;
+use App\Http\Controllers\DataAvPurchaseAdminController;
+use App\Http\Controllers\DataMgPurchaseAdminController;
+use App\Http\Controllers\DataAvMutationAdminController;
+use App\Http\Controllers\DataMgMutationAdminController;
+use App\Http\Controllers\LogAktivitasAdminController;
+use App\Http\Controllers\ProyekController;
 
 
 /*
@@ -63,6 +71,8 @@ Route::prefix('superadmin')->group(function () {
         Route::resource('/mutasi/aviasi', DataAvMutationController::class, ['parameters' => ['aviasi' => 'mutation']]);
         Route::resource('/mutasi/migas', DataMgMutationController::class, ['parameters' => ['migas' => 'mutation']]);
         Route::resource('/rental', DataAvRentalController::class, ['parameters' => ['rental' => 'rental']]);
+        Route::get('/log', [LogAktivitasController::class, 'index']);
+        Route::get('/proyek', [ProyekController::class, 'index']);
     });
 });
 
@@ -79,7 +89,19 @@ Route::prefix('admin')->group(function () {
         //Route::delete('/dataadmin/{id}', [DataUserController::class, 'destroy'])->name('users.destroy');
         Route::get('/stock/aviasi', [DataAvStockAdminController::class, 'index']);
         Route::get('/stock/migas', [DataMgStockAdminController::class, 'index']);
+        Route::get('/mutasi/aviasi', [DataAvMutationAdminController::class, 'index']);
+        Route::get('/mutasi/migas', [DataMgMutationAdminController::class, 'index']);
+        Route::get('/rental', [DataAvRentalAdminController::class, 'index']);
+        Route::get('/pembelian/aviasi', [DataAvPurchaseAdminController::class, 'index']);
+        Route::get('/pembelian/migas', [DataMgPurchaseAdminController::class, 'index']);
         Route::resource('/stock/aviasi', DataAvStockAdminController::class, ['parameters' => ['aviasi' => 'stock']]);
+        Route::resource('/stock/migas', DataMgStockAdminController::class, ['parameters' => ['migas' => 'stock']]);
+        Route::resource('/pembelian/aviasi', DataAvPurchaseAdminController::class, ['parameters' => ['aviasi' => 'purchase']]);
+        Route::resource('/pembelian/migas', DataMgPurchaseAdminController::class, ['parameters' => ['migas' => 'purchase']]);
+        Route::resource('/mutasi/aviasi', DataAvMutationAdminController::class, ['parameters' => ['aviasi' => 'mutation']]);
+        Route::resource('/mutasi/migas', DataMgMutationAdminController::class, ['parameters' => ['migas' => 'mutation']]);
+        Route::resource('/rental', DataAvRentalAdminController::class, ['parameters' => ['rental' => 'rental']]);
+        Route::get('/log', [LogAktivitasAdminController::class, 'index']);
     });
 });
 

@@ -10,14 +10,14 @@
 -->
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-  @include('layouts.admin-navbar')
+  @include('layouts.admin2-navbar')
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-blue elevation-4" style="background-color: #0A2647 ;">
+    <aside class="main-sidebar sidebar-dark-blue elevation-4" style="background-color: #0A2647;" > 
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link" >
       
-      <center class="brand-text font-weight-bold" style="text-align :center; color: white;">SINVEN</center>
+      <center class="brand-text font-weight-bold" style="text-align :center; color: white;">SIMI</center>
     </a>
 
     <!-- Sidebar -->
@@ -25,7 +25,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ url('dist/img/user.png') }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ url('dist/img/user.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block" style="color: white;">{{ auth()->user()->name }}</a>
@@ -41,7 +41,7 @@
                with font-awesome or any other icon font library -->
           
           <li class="nav-item">
-            <a href="/admin/home" class="nav-link">
+            <a href="/admin/home" class="nav-link ">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Dashboard
@@ -49,17 +49,19 @@
               </p>
             </a>
           </li>
-        
+
+
+
           <li class="nav-item menu-open">
             <a href="" class="nav-link active">
-              <i class="nav-icon fas fa-exchange-alt"></i>
+              <i class="nav-icon fas fa-box-open"></i>
               <p>
               Data Stock Barang
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item ">
+              <li class="nav-item">
                 <a href="/admin/stock/aviasi" class="nav-link active" style="background-color: #9cc5f0;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
@@ -76,8 +78,50 @@
           </li>
           
           <li class="nav-item">
+            <a href="/admin/rental" class="nav-link">
+              <i class="nav-icon fas fa-clipboard-list"></i>
+              <p>
+                Data Peminjaman Aviasi
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="" class="nav-link">
-              <i class="nav-icon fas fa-box-open"></i>
+              <i class="nav-icon fas fa-clipboard-check"></i>
+              <p>
+                Data Pembelian
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admin/pembelian/aviasi" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Aviasi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/pembelian/migas" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Migas
+                 
+                  </p>
+                  
+                </a>
+                
+          </li>
+          
+
+
+        </ul>
+          </li>
+          
+         
+
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              <i class="nav-icon fas fa-exchange-alt"></i>
               <p>
               Data Mutasi Barang
                 <i class="fas fa-angle-left right"></i>
@@ -85,54 +129,35 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/stock/aviasi" class="nav-link">
+                <a href="/admin/mutasi/aviasi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/stock/aviasi" class="nav-link">
+                <a href="/admin/mutasi/migas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas
-                  <i class="right fas fa-angle-left"></i>
+                 
                   </p>
                   
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>Pipa</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>Baut</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>...</p>
-                    </a>
-                  </li>
-                </ul>
-          </li>
-          </ul>
-          <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="nav-icon fas fa-clipboard"></i>
-              <p>
-                Data Pesanan
                 
+          </li>
+          
+          
+
+
+        </ul>
+        <li class="nav-item">
+          <a href="" class="nav-link">
+              <i class="nav-icon fas fa-ellipsis-h"></i>
+              <p>
+              Proyek Migas
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
           </li>
-
-
-
-        
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -176,28 +201,33 @@
                               style="font-size: 1rem; " id="btnAdd"><span><i class="fas fa-plus"></i></span>  Tambah</button>
 
                 </div>
+                <br>
+                <div class="category-filter"  >
+                  <select id="categoryFilter" class="form-control" >
+                  <option value="x" disabled >Filter by Name</option>
+                  <option value="">Show All</option>
+                    @foreach ($data as $d)
+                    <option value="{{ $d->name }}">{{ $d->name }}</option>
+                    @endforeach
+                  </select>
+                </div>
                   <table id="example1" class="table table-bordered table-hover" >
                     <thead>
                     <tr>
+                      <th>No.</th>
                       <th>Nama Barang</th>
                       <th>Keterangan</th>
                       <th>Jumlah</th>
-                      <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($data as $d)
+                    @foreach ($data as $index => $d)
                     <tr>
+                      <td>{{ $index+1 }}</td>
                       <td>{{ $d->name }}</td>
                       <td>{{ $d->description }}</td>
                       <td>{{ $d->quantity }}</td>
-                      <td style="text-align: center;">
-                      <button class="btn btn-info" data-toggle="modal"  id="btnEdit-{{ $d->id }}"
-                      data-target="modal-edit-{{ $d->id }}" style="font-size: 0.8rem; padding: 0.2rem 0.75rem;"><span><i class="fas fa-edit"></i></span>  Edit</button>
-                      <button class="btn btn-danger" data-toggle="modal" id="btnDelete-{{ $d->id }}"
-                              data-target="modal-delete-{{ $d->id }}" style="font-size: 0.8rem; padding: 0.2rem 0.75rem;"><span><i class="fas fa-trash"></i></span> Hapus</button>
                       
-                      </td>
 
                       {{-- Modal Decline --}}
                               <div class="modal fade bd-example-modal-sm" id="modal-delete-{{ $d->id }}" tabindex="-1" role="dialog"
@@ -404,21 +434,72 @@
 <!-- Page specific script -->
 @section('script')
 <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-     
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
+  $("document").ready(function () {
+      $("#example1").DataTable({
+        "searching": true,
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        buttons: {
+          dom: {
+              button: {
+                  className: 'btn btn-outline-dark' //Primary class for all buttons
+              }
+          },
+          buttons: [
+            {
+            extend: 'print',
+            title: 'Aviasi Stocks',
+              text: '<span><i class="fas fa-print"></i></span>  Print',
+              exportOptions: {
+                columns: [0, 1, 2, 3]
+              }
+          },
+          {
+              extend: 'excel',
+              
+              title: 'Aviasi Stocks',
+              text: '<span><i class="fas fa-download"></i></span>  Download as Excel',
+              exportOptions: {
+                columns: [0, 1, 2, 3]
+              }
+          }
+          ]
+        }
+      }).buttons().container().appendTo('#example1_wrapper .row .col-sm-12:eq(2)');
+      $(".dt-buttons").css("margin-top", "20px");
+      //Get a reference to the new datatable
+      var table = $('#example1').DataTable();
+      //Take the category filter drop down and append it to the datatables_filter div. 
+      //You can use this same idea to move the filter anywhere withing the datatable that you want.
+      $("#example1_filter.dataTables_filter").append($("#categoryFilter"));
+      
+      //Get the column index for the Category column to be used in the method below ($.fn.dataTable.ext.search.push)
+      //This tells datatables what column to filter on when a user selects a value from the dropdown.
+      //It's important that the text used here (Category) is the same for used in the header of the column to filter
+      var categoryIndex = 0;
+      $("#example1 th").each(function (i) {
+        if ($($(this)).html() == "Nama Barang") {
+          categoryIndex = i; return false;
+        }
+      });
+      //Use the built in datatables API to filter the existing rows by the Category column
+      $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+          var selectedItem = $('#categoryFilter').val()
+          var category = data[categoryIndex];
+          if (selectedItem === "" || category.includes(selectedItem) || selectedItem === "x" ) {
+            return true;
+          }
+          return false;
+        }
+      );
+      //Set the change event for the Category Filter dropdown to redraw the datatable each time
+      //a user selects a new filter.
+      $("#categoryFilter").change(function (e) {
+        table.draw();
+      });
+      table.draw();
     });
-  });
+  
   $(document).on('click', '#btnAdd', function(){
     $("#ModalAdd").modal('show',{backdrop: 'true'});
   });
@@ -434,7 +515,7 @@
             "onclick":null,
             "showDuration":"300",
             "hideDuration":"1000",
-            "timeOut":"30000",
+            "timeOut":"9000",
             "extendedTimeOut":"1000",
             "showEasing":"swing",
             "hideEasing":"linear",
@@ -446,7 +527,11 @@
     @endif
 
     @if (session()->has('error'))
-      toastr.error("<b>Input gagal</b><br>Mohon cek kembali.")
+      toastr.error("{{ session('error') }}")
+    @endif
+
+    @if (session()->has('warning'))
+      toastr.warning("{{ session('warning') }}")
     @endif
   });
   

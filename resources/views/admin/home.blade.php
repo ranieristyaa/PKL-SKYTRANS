@@ -10,14 +10,14 @@
 -->
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-  @include('layouts.admin-navbar')
+  @include('layouts.admin2-navbar')
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-blue elevation-4" style="background-color: #0A2647;" > 
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link" >
       
-      <center class="brand-text font-weight-bold" style="text-align :center; color: white;">SINVEN</center>
+      <center class="brand-text font-weight-bold" style="text-align :center; color: white;">SIMI</center>
     </a>
 
     <!-- Sidebar -->
@@ -25,7 +25,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ url('dist/img/user.png') }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ url('dist/img/user.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block" style="color: white;">{{ auth()->user()->name }}</a>
@@ -77,6 +77,45 @@
             </ul>
           </li>
           
+          <li class="nav-item">
+            <a href="/admin/rental" class="nav-link">
+              <i class="nav-icon fas fa-clipboard-list"></i>
+              <p>
+                Data Peminjaman Aviasi
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              <i class="nav-icon fas fa-clipboard-check"></i>
+              <p>
+                Data Pembelian
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admin/pembelian/aviasi" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Aviasi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/pembelian/migas" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Migas
+                 
+                  </p>
+                  
+                </a>
+                
+          </li>
+          
+
+
+        </ul>
+          </li>
           
          
 
@@ -90,49 +129,31 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/stock/aviasi" class="nav-link">
+                <a href="/admin/mutasi/aviasi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/stock/aviasi" class="nav-link">
+                <a href="/admin/mutasi/migas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas
-                  <i class="right fas fa-angle-left"></i>
+                 
                   </p>
                   
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>Pipa</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>Baut</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>...</p>
-                    </a>
-                  </li>
-                </ul>
+                
           </li>
+          
           
 
 
         </ul>
         <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="nav-icon fas fa-clipboard"></i>
+          <a href="/admin/proyek" class="nav-link">
+              <i class="nav-icon fas fa-ellipsis-h"></i>
               <p>
-                Data Pesanan
+              Proyek Migas
                 
               </p>
             </a>
@@ -164,90 +185,39 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+    
+    
 
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
+      @if (session()->has('successLogin'))
+      <div class="alert alert-success alert-dismissible" role="alert" style="background-color: #D3EBCD; color: black;">
+        {{ session('successLogin') }}
+        @php
+        session()->forget('successLogin')
+        @endphp
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     @endif
       <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>150</h3>
-
-                <p>New Orders</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                <p>Bounce Rate</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>44</h3>
-
-                <p>User Registrations</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>65</h3>
-
-                <p>Unique Visitors</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-        </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="card">
+        
+          <div class="col-lg-8">
+            <div class="shadow-lg card">
               <div class="card-header border-0">
                 <div class="d-flex justify-content-between">
-                  <h3 class="card-title">Online Store Visitors</h3>
-                  <a href="javascript:void(0);">View Report</a>
+                  <h3 class="card-title" style="font-weight: 700;">Progress Proyek Migas</h3>
+             
                 </div>
               </div>
-              <div class="card-body">
+              <div class="card-body" style="padding: 0rem 2rem 1.2rem 1.5rem;">
                 <div class="d-flex">
-                  <p class="d-flex flex-column">
-                    <span class="text-bold text-lg">820</span>
-                    <span>Visitors Over Time</span>
-                  </p>
+                 
                   <p class="ml-auto d-flex flex-column text-right">
                     <span class="text-success">
-                      <i class="fas fa-arrow-up"></i> 12.5%
+                      <i class="fas fa-arrow-up"></i> 10%
                     </span>
                     <span class="text-muted">Since last week</span>
                   </p>
@@ -255,225 +225,245 @@
                 <!-- /.d-flex -->
 
                 <div class="position-relative mb-4">
-                  <canvas id="visitors-chart" height="200"></canvas>
+                  <canvas id="visitors-chart" height="300"></canvas>
                 </div>
 
-                <div class="d-flex flex-row justify-content-end">
-                  <span class="mr-2">
-                    <i class="fas fa-square text-primary"></i> This Week
-                  </span>
-
-                  <span>
-                    <i class="fas fa-square text-gray"></i> Last Week
-                  </span>
-                </div>
+               
               </div>
+              
             </div>
-            <!-- /.card -->
-
-            <div class="card">
-              <div class="card-header border-0">
-                <h3 class="card-title">Products</h3>
-                <div class="card-tools">
-                  <a href="#" class="btn btn-tool btn-sm">
-                    <i class="fas fa-download"></i>
-                  </a>
-                  <a href="#" class="btn btn-tool btn-sm">
-                    <i class="fas fa-bars"></i>
-                  </a>
-                </div>
-              </div>
-              <div class="card-body table-responsive p-0">
-                <table class="table table-striped table-valign-middle">
-                  <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Sales</th>
-                    <th>More</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>
-                      <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                      Some Product
-                    </td>
-                    <td>$13 USD</td>
-                    <td>
-                      <small class="text-success mr-1">
-                        <i class="fas fa-arrow-up"></i>
-                        12%
-                      </small>
-                      12,000 Sold
-                    </td>
-                    <td>
-                      <a href="#" class="text-muted">
-                        <i class="fas fa-search"></i>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                      Another Product
-                    </td>
-                    <td>$29 USD</td>
-                    <td>
-                      <small class="text-warning mr-1">
-                        <i class="fas fa-arrow-down"></i>
-                        0.5%
-                      </small>
-                      123,234 Sold
-                    </td>
-                    <td>
-                      <a href="#" class="text-muted">
-                        <i class="fas fa-search"></i>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                      Amazing Product
-                    </td>
-                    <td>$1,230 USD</td>
-                    <td>
-                      <small class="text-danger mr-1">
-                        <i class="fas fa-arrow-down"></i>
-                        3%
-                      </small>
-                      198 Sold
-                    </td>
-                    <td>
-                      <a href="#" class="text-muted">
-                        <i class="fas fa-search"></i>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                      Perfect Item
-                      <span class="badge bg-danger">NEW</span>
-                    </td>
-                    <td>$199 USD</td>
-                    <td>
-                      <small class="text-success mr-1">
-                        <i class="fas fa-arrow-up"></i>
-                        63%
-                      </small>
-                      87 Sold
-                    </td>
-                    <td>
-                      <a href="#" class="text-muted">
-                        <i class="fas fa-search"></i>
-                      </a>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <!-- /.card -->
+           
+            
           </div>
+    
           <!-- /.col-md-6 -->
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-header border-0">
-                <div class="d-flex justify-content-between">
-                  <h3 class="card-title">Sales</h3>
-                  <a href="javascript:void(0);">View Report</a>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="d-flex">
-                  <p class="d-flex flex-column">
-                    <span class="text-bold text-lg">$18,230.00</span>
-                    <span>Sales Over Time</span>
-                  </p>
-                  <p class="ml-auto d-flex flex-column text-right">
-                    <span class="text-success">
-                      <i class="fas fa-arrow-up"></i> 33.1%
-                    </span>
-                    <span class="text-muted">Since last month</span>
-                  </p>
-                </div>
-                <!-- /.d-flex -->
-
-                <div class="position-relative mb-4">
-                  <canvas id="sales-chart" height="200"></canvas>
-                </div>
-
-                <div class="d-flex flex-row justify-content-end">
-                  <span class="mr-2">
-                    <i class="fas fa-square text-primary"></i> This year
-                  </span>
-
-                  <span>
-                    <i class="fas fa-square text-gray"></i> Last year
-                  </span>
-                </div>
-              </div>
-            </div>
+          <div class="col-lg">
+            
             <!-- /.card -->
-
-            <div class="card">
-              <div class="card-header border-0">
-                <h3 class="card-title">Online Store Overview</h3>
-                <div class="card-tools">
-                  <a href="#" class="btn btn-sm btn-tool">
-                    <i class="fas fa-download"></i>
-                  </a>
-                  <a href="#" class="btn btn-sm btn-tool">
-                    <i class="fas fa-bars"></i>
-                  </a>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                  <p class="text-success text-xl">
-                    <i class="ion ion-ios-refresh-empty"></i>
-                  </p>
-                  <p class="d-flex flex-column text-right">
-                    <span class="font-weight-bold">
-                      <i class="ion ion-android-arrow-up text-success"></i> 12%
-                    </span>
-                    <span class="text-muted">CONVERSION RATE</span>
-                  </p>
-                </div>
-                <!-- /.d-flex -->
-                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                  <p class="text-warning text-xl">
-                    <i class="ion ion-ios-cart-outline"></i>
-                  </p>
-                  <p class="d-flex flex-column text-right">
-                    <span class="font-weight-bold">
-                      <i class="ion ion-android-arrow-up text-warning"></i> 0.8%
-                    </span>
-                    <span class="text-muted">SALES RATE</span>
-                  </p>
-                </div>
-                <!-- /.d-flex -->
-                <div class="d-flex justify-content-between align-items-center mb-0">
-                  <p class="text-danger text-xl">
-                    <i class="ion ion-ios-people-outline"></i>
-                  </p>
-                  <p class="d-flex flex-column text-right">
-                    <span class="font-weight-bold">
-                      <i class="ion ion-android-arrow-down text-danger"></i> 1%
-                    </span>
-                    <span class="text-muted">REGISTRATION RATE</span>
-                  </p>
-                </div>
-                <!-- /.d-flex -->
+            <div class="shadow-lg info-box mb-3">
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-user"></i></span>
+              <div class="info-box-content">
+              <span class="info-box-text">Total User</span>
+              <span class="info-box-number">{{ \DB::table('users')->count('id') }}</span>
               </div>
             </div>
+            <div class="shadow-lg info-box mb-3">
+              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-plane"></i></span>
+              <div class="info-box-content">
+              <span class="info-box-text">Total Barang Aviasi</span>
+              <span class="info-box-number">{{ \DB::table('aviasi_stocks')->count() }}</span>
+              </div>
+            </div>
+            <div class="shadow-lg info-box mb-3">
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-tools"></i></span>
+              <div class="info-box-content">
+              <span class="info-box-text">Total Barang Migas</span>
+              <span class="info-box-number">{{ \DB::table('migas_stocks')->sum('quantity') }}</span>
+              </div>
+            </div>
+            @foreach($data3 as $d)
+              @php $x = $d->jm @endphp
+            @endforeach
+            @foreach($data1 as $d)
+            
+            <div class="shadow-lg info-box mb-3">
+              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-tools"></i></span>
+              <div class="info-box-content">
+              <span class="info-box-text">Total Barang Masuk Minggu Ini</span>
+              <span class="info-box-number">{{ $d->jum_msk !== null ? $d->jum_msk : 0}} barang Aviasi dan {{ $x != null ? $x : 0 }} barang Migas</span>
+              </div>
+            </div>
+            
+           @endforeach
+           @foreach($data4 as $d)
+              @php $y = $d->jk @endphp
+            @endforeach
+           @foreach($data2 as $d)
+            <div class="shadow-lg info-box mb-3">
+              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-tools"></i></span>
+              <div class="info-box-content">
+              <span class="info-box-text">Total Barang Keluar Minggu Ini</span>
+              
+              <span class="info-box-number">{{ $d->jum_msk !== null ? $d->jum_msk : 0 }} barang Aviasi dan {{ $y }} barang Migas</span>
+              </div>
+            </div>
+           @endforeach
+            
+            
+            
+
           </div>
           <!-- /.col-md-6 -->
         </div>
+      <div class="row">
+      
+                  <div class="col-lg-4">
+                  <div class="shadow-lg card" >
+              <div class="card-header border-0" style="background-color: gray; color: white;">
+                <h3 class="card-title">Overview Stock Aviasi</h3>
+
+              </div>
+              <div class="card-body">
+                @php
+                  $a = \DB::table('aviasi_stocks')->latest('created_at')->first();
+                  $b = \DB::table('aviasi_stocks')->latest('updated_at')->first();
+                  $c = \DB::table('activity_log')->where('log_name', 'Aviasi Stock')->where('event', '=', 'deleted')->orderBy('created_at', 'desc')->first();
+                  $d = json_decode($c->properties);
+                @endphp
+              
+                 
+               
+                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                  <p class="text-success text-xl">
+                    <i class="far fa-plus-square" style="color: gray;"></i>
+                  </p>
+                  
+                  <p class="d-flex flex-column text-right">
+                    <span class="font-weight-bold">
+                       Terakhir Ditambahkan
+                    </span>
+                    <span class="text-info">{{ $a->name }}</span>
+                  </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                  <p class="text-success text-xl">
+                    <i class="far fa-clock" style="color: gray;"></i>
+                  </p>
+                  
+                  <p class="d-flex flex-column text-right">
+                    <span class="font-weight-bold">
+                       Terakhir Diperbarui
+                    </span>
+                    <span class="text-info">{{ $b->name }}</span>
+                  </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                  <p class="text-success text-xl">
+                    <i class="fas fa-trash" style="color: gray;"></i>
+                  </p>
+                  
+                  <p class="d-flex flex-column text-right">
+                    <span class="font-weight-bold">
+                       Terakhir Dihapus
+                    </span>
+                    <span class="text-info">{{ $d->old->name }}</span>
+                  </p>
+                </div>
+                
+           
+                
+              </div>
+            </div>
+                  </div>
+                  <div class="col-lg-4">
+                  <div class="shadow-lg card">
+              <div class="card-header border-0" style="background-color: gray; color: white;">
+                <h3 class="card-title">Overview Stock Migas</h3>
+
+              </div>
+              <div class="card-body">
+                @php
+                  $a = \DB::table('migas_stocks')->latest('created_at')->first();
+                  $b = \DB::table('migas_stocks')->latest('updated_at')->first();
+                  $x = \DB::table('activity_log')->where('log_name', 'Migas Stock')->where('event', '=', 'deleted')->orderBy('created_at', 'desc')->first();
+                  if ($x != null)
+                    $z = json_decode($x->properties);
+                @endphp
+              
+                 
+               
+                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                  <p class="text-success text-xl">
+                    <i class="far fa-plus-square" style="color: gray;"></i>
+                  </p>
+                  
+                  <p class="d-flex flex-column text-right">
+                    <span class="font-weight-bold">
+                       Terakhir Masuk
+                    </span>
+                    <span class="text-info">{{ $a->name }}</span>
+                  </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                  <p class="text-success text-xl">
+                    <i class="far fa-clock" style="color: gray;"></i>
+                  </p>
+                  
+                  <p class="d-flex flex-column text-right">
+                    <span class="font-weight-bold">
+                       Terakhir Diperbarui
+                    </span>
+                    <span class="text-info">{{ $b->name }}</span>
+                  </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                  <p class="text-success text-xl">
+                    <i class="fas fa-trash" style="color: gray;"></i>
+                  </p>
+                  
+                  <p class="d-flex flex-column text-right">
+                    <span class="font-weight-bold">
+                       Terakhir Dihapus
+                    </span>
+                    <span class="text-info">{{ isset($z) ? $z->old->name : '-' }}</span>
+                  </p>
+                </div>
+                
+           
+                
+              </div>
+              
+              
+          <!-- ./col -->
+        </div>
+        
+        
         <!-- /.row -->
       </div>
+      <div class="col-lg-4">
+      <div class="card">
+<div class="card-header">
+<h3 class="card-title">Log Aktivitas</h3>
+<div class="card-tools">
+
+</div>
+</div>
+
+<div class="card-body p-0" style="display: block;">
+<ul class="products-list product-list-in-card  pr-2" >
+@foreach($data5->take(5) as $d)
+<li class="item">
+<div class="product-info" style="margin-left: 20px;">
+<a href="javascript:void(0)" class="product-title">{{ $d->description }}
+<span class="badge float-right {{ $d->log_name == 'Aviasi Stock' ? 'badge-info' : 'badge-success' }}">{{ $d->log_name == 'Aviasi Stock' ? 'Aviasi' : 'Migas' }}</span></a>
+<span class="product-description">
+@php
+$en = json_decode($d->properties);
+@endphp
+{{ $d->created_at }}
+</span>
+</div>
+</li>
+@endforeach
+
+
+
+
+
+
+
+
+</ul>
+</div>
+
+<div class="card-footer text-center" style="display: block;">
+<a href="/admin/log" class="uppercase">Lihat Semua Log</a>
+</div>
+
+</div>
+      </div>
+      
+      
       <!-- /.container-fluid -->
     </div>
     <!-- /.content -->

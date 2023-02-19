@@ -10,10 +10,10 @@
 -->
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-  @include('layouts.admin2-navbar')
+  @include('layouts.admin-navbar')
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-blue elevation-4" style="background-color: #0A2647;" > 
+    <aside class="main-sidebar sidebar-dark-blue elevation-4" style="background-color: #0A2647 ;">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link" >
       
@@ -41,7 +41,7 @@
                with font-awesome or any other icon font library -->
           
           <li class="nav-item">
-            <a href="/admin/home" class="nav-link ">
+            <a href="/superadmin/home" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Dashboard
@@ -49,11 +49,17 @@
               </p>
             </a>
           </li>
-
-
-
-          <li class="nav-item menu-open">
-            <a href="" class="nav-link active">
+          <li class="nav-item">
+            <a href="/superadmin/dataadmin" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+              Manajemen Akun
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a href="" class="nav-link ">
               <i class="nav-icon fas fa-box-open"></i>
               <p>
               Data Stock Barang
@@ -61,14 +67,14 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/stock/aviasi" class="nav-link " >
+              <li class="nav-item ">
+                <a href="/superadmin/stock/aviasi" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/stock/migas" class="nav-link active" style="background-color: #9cc5f0;">
+                <a href="/superadmin/stock/migas" class="nav-link" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas</p>
                 </a>
@@ -76,9 +82,8 @@
               
             </ul>
           </li>
-          
           <li class="nav-item">
-            <a href="/admin/rental" class="nav-link">
+            <a href="/superadmin/rental" class="nav-link">
               <i class="nav-icon fas fa-clipboard-list"></i>
               <p>
                 Data Peminjaman Aviasi
@@ -96,13 +101,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/pembelian/aviasi" class="nav-link">
+                <a href="/superadmin/pembelian/aviasi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/pembelian/migas" class="nav-link">
+                <a href="/superadmin/pembelian/migas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas
                  
@@ -116,9 +121,6 @@
 
         </ul>
           </li>
-          
-         
-
           <li class="nav-item">
             <a href="" class="nav-link">
               <i class="nav-icon fas fa-exchange-alt"></i>
@@ -129,35 +131,35 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/mutasi/aviasi" class="nav-link">
+                <a href="/superadmin/mutasi/aviasi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/mutasi/migas" class="nav-link">
+                <a href="/superadmin/mutasi/migas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas
-                 
+                  
                   </p>
                   
                 </a>
-                
+               
           </li>
-          
-          
-
-
-        </ul>
-        <li class="nav-item">
-          <a href="" class="nav-link">
+         
+          </ul>
+          <li class="nav-item">
+          <a href="/superadmin/proyek" class="nav-link active">
               <i class="nav-icon fas fa-ellipsis-h"></i>
               <p>
               Proyek Migas
-                <i class="fas fa-angle-left right"></i>
+                
               </p>
             </a>
           </li>
+
+
+       
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -201,81 +203,35 @@
                               style="font-size: 1rem; " id="btnAdd"><span><i class="fas fa-plus"></i></span>  Tambah</button>
 
                 </div>
-                <br>
                 <div class="category-filter"  >
-                  <select id="categoryFilter" class="form-control" >
-                  <option value="x" disabled >Filter by Name</option>
-                  <option value="">Show All</option>
-                    @foreach ($data as $d)
-                    <option value="{{ $d->name }}">{{ $d->name }}</option>
-                    @endforeach
-                  </select>
-                </div>
+   
+    </div>
                   <table id="example1" class="table table-bordered table-hover" >
                     <thead>
                     <tr>
                       <th>No.</th>
-                      <th>Nama Barang</th>
+                      <th>Minggu ke-</th>
                       <th>Keterangan</th>
-                      <th>Jumlah</th>
-                      <th>Harga Satuan</th>
-                      <th>Total Harga</th>
-                     
+                      <th>Status</th>
+                      <th>Progres Proyek</th>
+                      <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($data as $index => $d)
-                    <tr>
-                    <td>{{ $index+1 }}</td>
-                    <td>{{ $d->name }}</td>
-                    <td>{{ $d->description }}</td>
-                    <td>{{ $d->quantity }}</td>
-                    <td>{{ $d->price_per_item }}</td>
-                    <td>{{ $d->total_price }}</td>
-                      
-
-                      {{-- Modal Decline --}}
-                              <div class="modal fade bd-example-modal-sm" id="modal-delete-{{ $d->id }}" tabindex="-1" role="dialog"
-                                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered" role="document">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                              <h4 class="modal-title" id="exampleModalLongTitle" style="font-size: 1.25rem;">
-                                                  Konfirmasi Hapus</h4>
-                                              <button type="button" class="close" data-dismiss="modal"
-                                                  aria-label="Close">
-                                                  <span aria-hidden="true">&times;</span>
-                                              </button>
-                                              
-                                          </div>
-                                          <div class="modal-body">
-                                            
-                                              <div>
-                                                  <p><b>Hapus akun pengguna "{{ $d->id }}"</b></p>
-                                                  <p class="mb-0">Akun pengguna yang telah dihapus tidak dapat
-                                                      dikembalikan.
-                                                  </p>
-                                              </div>
-                                          </div>
-                                          <div class="modal-footer">
-                                              <button type="button" class="btn btn-light btn-sm"
-                                                  data-dismiss="modal">Batal</button>
-                                              <form action="" method="post"
-                                                  class="d-inline">
-                                                  @method('delete')
-                                                  @csrf
-                                                  <button class="btn btn-danger btn-sm" data-id="{{ $d->id }}">Hapus</button>
-                                              </form>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              {{-- End of modal --}}
-                              
-                              
-                      
-                    </tr>
-                    @endforeach
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>
+                        <div class="progress progress-sm">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
+                        </div>
+                        </div>
+                        <small>
+                        10% Complete
+                        </small>
+                    </th>
+                    <th></th>
                     </tbody>
                   
                   </table>
@@ -293,7 +249,7 @@
         </div>
         
             <!-- Modal Add -->
-            <div class="modal fade" id="ModalAdd" tabindex="-1" aria-labelledby="titleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="ModalAdd" tabindex="-1" aria-labelledby="titleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -406,7 +362,7 @@
           buttons: [
             {
             extend: 'print',
-            title: 'Aviasi Stocks',
+            title: 'Migas Stocks',
               text: '<span><i class="fas fa-print"></i></span>  Print',
               exportOptions: {
                 columns: [0, 1, 2, 3, 4, 5]
@@ -415,7 +371,7 @@
           {
               extend: 'excel',
               
-              title: 'Aviasi Stocks',
+              title: 'Migas Stocks',
               text: '<span><i class="fas fa-download"></i></span>  Download as Excel',
               exportOptions: {
                 columns: [0, 1, 2, 3, 4, 5]
@@ -425,44 +381,11 @@
         }
       }).buttons().container().appendTo('#example1_wrapper .row .col-sm-12:eq(2)');
       $(".dt-buttons").css("margin-top", "20px");
-      //Get a reference to the new datatable
-      var table = $('#example1').DataTable();
-      //Take the category filter drop down and append it to the datatables_filter div. 
-      //You can use this same idea to move the filter anywhere withing the datatable that you want.
-      $("#example1_filter.dataTables_filter").append($("#categoryFilter"));
-      
-      //Get the column index for the Category column to be used in the method below ($.fn.dataTable.ext.search.push)
-      //This tells datatables what column to filter on when a user selects a value from the dropdown.
-      //It's important that the text used here (Category) is the same for used in the header of the column to filter
-      var categoryIndex = 0;
-      $("#example1 th").each(function (i) {
-        if ($($(this)).html() == "Nama Barang") {
-          categoryIndex = i; return false;
-        }
-      });
-      //Use the built in datatables API to filter the existing rows by the Category column
-      $.fn.dataTable.ext.search.push(
-        function (settings, data, dataIndex) {
-          var selectedItem = $('#categoryFilter').val()
-          var category = data[categoryIndex];
-          if (selectedItem === "" || category.includes(selectedItem) || selectedItem === "x" ) {
-            return true;
-          }
-          return false;
-        }
-      );
-      //Set the change event for the Category Filter dropdown to redraw the datatable each time
-      //a user selects a new filter.
-      $("#categoryFilter").change(function (e) {
-        table.draw();
-      });
-      table.draw();
+     
     });
-  
   $(document).on('click', '#btnAdd', function(){
     $("#ModalAdd").modal('show',{backdrop: 'true'});
   });
-
   $(document).ready(function() {
     toastr.options = {
             "closeButton":false,
@@ -474,7 +397,7 @@
             "onclick":null,
             "showDuration":"300",
             "hideDuration":"1000",
-            "timeOut":"9000",
+            "timeOut":"7000",
             "extendedTimeOut":"1000",
             "showEasing":"swing",
             "hideEasing":"linear",
@@ -488,13 +411,6 @@
     @if (session()->has('error'))
       toastr.error("{{ session('error') }}")
     @endif
-
-    @if (session()->has('warning'))
-      toastr.warning("{{ session('warning') }}")
-    @endif
-  });
-  $(document).on('click', '#btnAdd', function(){
-    $("#ModalAdd").modal('show',{backdrop: 'true'});
   });
   
 </script>

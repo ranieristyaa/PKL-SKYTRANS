@@ -10,7 +10,7 @@
 -->
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-  @include('layouts.admin-navbar')
+  @include('layouts.admin2-navbar')
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-blue elevation-4" style="background-color: #0A2647 ;">
@@ -41,7 +41,7 @@
                with font-awesome or any other icon font library -->
           
           <li class="nav-item">
-            <a href="/superadmin/home" class="nav-link">
+            <a href="/admin/home" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Dashboard
@@ -50,7 +50,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/superadmin/dataadmin" class="nav-link">
+            <a href="/admin/dataadmin" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
               Manajemen Akun
@@ -68,13 +68,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item ">
-                <a href="/superadmin/mutasi/migas" class="nav-link" >
+                <a href="/admin/mutasi/migas" class="nav-link" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/superadmin/stock/migas" class="nav-link">
+                <a href="/admin/stock/migas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas</p>
                 </a>
@@ -83,7 +83,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="/superadmin/rental" class="nav-link">
+            <a href="/admin/rental" class="nav-link">
               <i class="nav-icon fas fa-clipboard-list"></i>
               <p>
                 Data Peminjaman Aviasi
@@ -101,13 +101,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/superadmin/pembelian/aviasi" class="nav-link">
+                <a href="/admin/pembelian/aviasi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/superadmin/pembelian/migas" class="nav-link">
+                <a href="/admin/pembelian/migas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas
                  
@@ -131,13 +131,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/superadmin/mutasi/aviasi" class="nav-link " >
+                <a href="/admin/mutasi/aviasi" class="nav-link " >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/superadmin/mutasi/migas" class="nav-link active" style="background-color: #9cc5f0;">
+                <a href="/admin/mutasi/migas" class="nav-link active" style="background-color: #9cc5f0;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas
              
@@ -259,7 +259,7 @@
                                           <div class="modal-footer">
                                               <button type="button" class="btn btn-light btn-sm"
                                                   data-dismiss="modal">Batal</button>
-                                              <form action="/superadmin/mutasi/migas/{{ $d->id }}" method="post"
+                                              <form action="/admin/mutasi/migas/{{ $d->id }}" method="post"
                                                   class="d-inline">
                                                   @method('delete')
                                                   @csrf
@@ -283,7 +283,7 @@
                                                               </button>
                                 </div>
                                 <div class="modal-body">
-                            <form action="/superadmin/mutasi/migas/{{ $d->id }}" name="modal_popup" enctype="multipart/form-data" method="post">
+                            <form action="/admin/mutasi/migas/{{ $d->id }}" name="modal_popup" enctype="multipart/form-data" method="post">
                                     @method('PUT')
                                     @csrf
                                     <div class="form-group"  

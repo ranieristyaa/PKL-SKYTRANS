@@ -10,7 +10,7 @@
 -->
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-  @include('layouts.admin-navbar')
+  @include('layouts.admin2-navbar')
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-blue elevation-4" style="background-color: #0A2647 ;">
@@ -59,7 +59,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link ">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-box-open"></i>
               <p>
               Data Stock Barang
@@ -68,7 +68,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item ">
-                <a href="/superadmin/mutasi/migas" class="nav-link" >
+                <a href="/superadmin/stock/aviasi" class="nav-link" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
@@ -91,8 +91,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="" class="nav-link">
+          <li class="nav-item menu-open">
+            <a href="" class="nav-link active">
               <i class="nav-icon fas fa-clipboard-check"></i>
               <p>
                 Data Pembelian
@@ -101,13 +101,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/superadmin/pembelian/aviasi" class="nav-link">
+                <a href="/superadmin/pembelian/aviasi" class="nav-link" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/superadmin/pembelian/migas" class="nav-link">
+                <a href="/superadmin/pembelian/migas" class="nav-link active" style="background-color: #9cc5f0;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas
                  
@@ -121,8 +121,8 @@
 
         </ul>
           </li>
-          <li class="nav-item menu-open">
-            <a href="" class="nav-link active">
+          <li class="nav-item">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-exchange-alt"></i>
               <p>
               Data Mutasi Barang
@@ -131,20 +131,20 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/superadmin/mutasi/aviasi" class="nav-link " >
+                <a href="/superadmin/mutasi/aviasi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/superadmin/mutasi/migas" class="nav-link active" style="background-color: #9cc5f0;">
+                <a href="/superadmin/mutasi/migas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas
-             
+                 
                   </p>
                   
                 </a>
-               
+                
           </li>
           </ul>
           
@@ -166,13 +166,13 @@
         <div class="row mb-2">
           <div class="col-sm-6">
           <h1>
-          <i class="fas fa-exchange-alt"></i>
-            <span>Data Mutasi Barang Migas</span></h1>
+          <i class="fas fa-clipboard-check"></i>
+            <span>Data Pembelian Barang Migas</span></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-              <li class="breadcrumb-item">Data Mutasi Barang</li>
+              <li class="breadcrumb-item">Data Pembelian</li>
               <li class="breadcrumb-item active">Migas</li>
             </ol>
           </div><!-- /.col -->
@@ -195,24 +195,26 @@
                               style="font-size: 1rem; " id="btnAdd"><span><i class="fas fa-plus"></i></span>  Tambah</button>
 
                 </div>
-                <div class="category-filter"  >
-                <select id="categoryFilter" class="form-control" >
-                <option value="x" disabled >Filter by Name</option>
-                <option value="">Show All</option>
-                  @foreach ($data as $d)
-                  <option value="{{ $d->name }}">{{ $d->name }}</option>
-                  @endforeach
-                </select>
-              </div>
+                
+    <div class="category-filter"  >
+      <select id="categoryFilter" class="form-control" >
+      <option value="x" disabled >Filter by Name</option>
+      <option value="">Show All</option>
+        @foreach ($data as $d)
+        <option value="{{ $d->name }}">{{ $d->name }}</option>
+        @endforeach
+      </select>
+    </div>
                   <table id="example1" class="table table-bordered table-hover" >
                     <thead>
                     <tr>
                       <th>No.</th>
                       <th>Tanggal</th>
                       <th>Nama Barang</th>
-                      <th>Keterangan</th>
-                      <th>Barang Masuk</th>
-                      <th>Barang Keluar</th>
+                      <th>Jumlah</th>
+                      <th>Harga Satuan</th>
+                      <th>Total Harga</th>
+                    
                       <th>Action</th>
                     </tr>
                     </thead>
@@ -222,9 +224,10 @@
                       <td>{{ $index+1 }}</td>
                       <td>{{ $d->date }}</td>
                       <td>{{ $d->name }}</td>
-                      <td>{{ $d->description }}</td>
-                      <td>{{ $d->item_in }}</td>
-                      <td>{{ $d->item_out }}</td>
+                      <td>{{ $d->quantity }}</td>
+                      <td>{{ $d->price_per_item }}</td>
+                      <td>{{ $d->total_price }}</td>
+                     
                       <td style="text-align: center;">
                       <button class="btn btn-info" data-toggle="modal"  id="btnEdit-{{ $d->id }}"
                       data-target="modal-edit-{{ $d->id }}" style="font-size: 0.8rem; padding: 0.2rem 0.75rem;"><span><i class="fas fa-edit"></i></span>  Edit</button>
@@ -250,8 +253,8 @@
                                           <div class="modal-body">
                                             
                                               <div>
-                                                  <p><b>Hapus data mutasi barang "{{ $d->name }}" pada tanggal {{ $d->date }}</b></p>
-                                                  <p class="mb-0">Menghapus data ini menyebabkan data pembelian barang terkait juga terhapus dan jumlah stock barang akan terupdate.</p>
+                                                  <p><b>Hapus data pembelian barang "{{ $d->name }}" pada tanggal {{ $d->date }}?</b></p>
+                                                  <p class="mb-0">Menghapus data ini menyebabkan data mutasi barang terkait juga terhapus dan jumlah stock barang akan terupdate.</p>
                                                   <br>
                                                   <p class="mb-0 text-danger">*Data yang sudah dihapus tidak dapat dikembalikan.</p>
                                               </div>
@@ -259,7 +262,7 @@
                                           <div class="modal-footer">
                                               <button type="button" class="btn btn-light btn-sm"
                                                   data-dismiss="modal">Batal</button>
-                                              <form action="/superadmin/mutasi/migas/{{ $d->id }}" method="post"
+                                              <form action="/superadmin/pembelian/migas/{{ $d->id }}" method="post"
                                                   class="d-inline">
                                                   @method('delete')
                                                   @csrf
@@ -276,14 +279,14 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="titleModalLabel">Edit Data Mutasi Barang Migas</h5>
+                                    <h5 class="modal-title" id="titleModalLabel">Edit Barang Aviasi</h5>
                                     <button type="button" class="close" data-dismiss="modal"
                                                                   aria-label="Close">
                                                                   <span aria-hidden="true">&times;</span>
                                                               </button>
                                 </div>
                                 <div class="modal-body">
-                            <form action="/superadmin/mutasi/migas/{{ $d->id }}" name="modal_popup" enctype="multipart/form-data" method="post">
+                            <form action="/superadmin/pembelian/migas/{{ $d->id }}" name="modal_popup" enctype="multipart/form-data" method="post">
                                     @method('PUT')
                                     @csrf
                                     <div class="form-group"  
@@ -308,44 +311,50 @@
                                         @enderror
                                       </span>
                                     </div>
-                                    <div class="form-group"  
-                                    @error('description') style="border: 1px solid rgb(255, 0, 0)" @enderror>
-                                      <label for="description"><span class="fas fa-pencil-alt"></span> Keterangan</label>
-                                      <input type="text" class="form-control" id="description" name="description" placeholder="Masukkan keterangan" 
-                                      value= "{{ old('description') !== null ?  old('description') : "$d->description" }}" >
-                                      <span class="text-danger">
-                                        @error('description')
-                                          {{ $message }}
-                                        @enderror
-                                      </span>
-                                    </div>
+                              
                           
                                     <div class="form-group"
-                                    @error('item_in') style="border: 1px solid rgb(255, 0, 0)" @enderror>
-                                      <label for="item_in"><span class="fas fa-calculator"></span> Jumlah</label>
-                                      <input type="number"  class="form-control" id="item_in" name="item_in" placeholder="Masukkan jumlah" 
-                                      value= {{ old('item_in') !== null ?  old('item_in') : "$d->item_in" }} required>
+                                    @error('quantity') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                                      <label for="quantity"><span class="fas fa-calculator"></span> Jumlah</label>
+                                      <input type="number" min="1" class="form-control" id="quantity" name="quantity" placeholder="Masukkan jumlah" 
+                                      value= {{ old('quantity') !== null ?  old('quantity') : "$d->quantity" }} required>
                                       <span class="text-danger">
-                                        @error('item_in')
+                                        @error('quantity')
                                           {{ $message }}
                                         @enderror
                                       </span>
                                     </div>
                                     <div class="form-group"
-                                    @error('item_out') style="border: 1px solid rgb(255, 0, 0)" @enderror>
-                                      <label for="item_out"><span class="fas fa-calculator"></span> Jumlah</label>
-                                      <input type="number"  class="form-control" id="item_out" name="item_out" placeholder="Masukkan jumlah" 
-                                      value= {{ old('item_out') !== null ?  old('item_out') : "$d->item_out" }} required>
-                                      <span class="text-danger">
-                                        @error('item_out')
-                                          {{ $message }}
-                                        @enderror
-                                      </span>
-                                    </div>
-                                    
+                                            @error('price_per_item') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                                              <label for="price_per_item"><span class="far fa-money-bill-alt"></span> Harga Satuan</label>
+                                              <input type="number" min="1000" class="form-control" id="price_per_item" name="price_per_item" placeholder="Masukkan harga satuan" 
+                                              value={{ old('price_per_item') != null ? old('price_per_item') : "$d->price_per_item" }} required >
+                                              <span class="text-danger">
+                                                @error('price_per_item')
+                                                  {{ $message }}
+                                                @enderror
+                                              </span>
+                                            </div>
+                                            <div class="form-group"
+                                            @error('total_price') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                                              <label for="total_price"><span class="far fa-money-bill-alt"></span> Total Harga</label>
+                                              <input type="number" min="1000" class="form-control" id="total_price" name="total_price" placeholder="Masukkan total harga" 
+                                              value={{ old('total_price') != null ? old('total_price') : "$d->total_price" }} required >
+                                              <span class="text-danger">
+                                                @error('total_price')
+                                                  {{ $message }}
+                                                @enderror
+                                              </span>
+                                            </div>
+                                            <div class="form-group" style="display: none;">
+                                              <label for="old"><span class="fas fa-calculator"></span> Jumlah</label>
+                                              <input type="number" min="1" class="form-control" id="old" name="old" placeholder="Masukkan jumlah" 
+                                              value= "{{ $d->quantity }}" required>
+                                            
+                                            </div>
                                   
-                                    <small><p>Dengan mengedit data, data pembelian barang terkait dan jumlah stock barang akan terupdate.</p></small>
-                            
+                          
+                               <small><p>Dengan mengedit data, data mutasi barang masuk dan jumlah stock barang terkait akan terupdate.</p></small>
                               <div class="modal-footer">
                                 <button class="btn btn-success" type="submit">
                                   Save
@@ -381,7 +390,87 @@
         </div>
         
             <!-- Modal Add -->
-   
+    <div class="modal fade" id="ModalAdd" tabindex="-1" aria-labelledby="titleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titleModalLabel">Tambah Barang Migas</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                                                  aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                </div>
+                <div class="modal-body">
+						<form action="/superadmin/pembelian/migas" name="modal_popup" enctype="multipart/form-data" method="post">
+                    @csrf
+                    <div class="form-group"  
+                    @error('date') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                      <label for="date"><span class="fas fa-pencil-alt"></span> Tanggal</label>
+                      <input type="date" class="form-control" id="date" name="date" placeholder="Masukkan Tanggal" value="{{ old('date') }}" required>
+                      <span class="text-danger">
+                        @error('date')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                    <div class="form-group" 
+                    @error('name') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                      <label for="name"><span class="fas fa-user"></span> Nama Barang</label>
+                      <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama barang" value="{{ old('name') }}" required>
+                      <span class="text-danger">
+                        @error('name')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                    
+          
+                    <div class="form-group"
+                    @error('quantity') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                      <label for="quantity"><span class="fas fa-calculator"></span> Jumlah</label>
+                      <input type="number" min="1" class="form-control" id="quantity" name="quantity" placeholder="Masukkan jumlah" value="{{ old('quantity') }}" required >
+                      <span class="text-danger">
+                        @error('quantity')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                    <div class="form-group"
+                    @error('price_per_item') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                      <label for="price_per_item"><span class="far fa-money-bill-alt"></span> Harga Satuan</label>
+                      <input type="number" min="1000" class="form-control" id="price_per_item" name="price_per_item" placeholder="Masukkan harga satuan" value="{{ old('price_per_item') }}" required >
+                      <span class="text-danger">
+                        @error('price_per_item')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                    <div class="form-group"
+                    @error('total_price') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                      <label for="total_price"><span class="far fa-money-bill-alt"></span> Total Harga</label>
+                      <input type="number" min="1000" class="form-control" id="total_price" name="total_price" placeholder="Masukkan total harga" value="{{ old('total_price') }}" required >
+                      <span class="text-danger">
+                        @error('total_price')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                  
+					
+                    <small><p>Dengan menambahkan data, data mutasi barang masuk akan ter-generate dan jumlah stock barang terkait akan terupdate.</p></small>
+							<div class="modal-footer">
+								<button class="btn btn-success" type="submit">
+									Add
+								</button>
+								<button type="reset" class="btn btn-danger"  data-dismiss="modal" aria-hidden="true">
+									Cancel
+								</button>
+							</div>
+						</form>
+					</div>
+            </div>
+        </div>
+    </div>
 
  
 </div>
@@ -414,7 +503,7 @@
           buttons: [
             {
             extend: 'print',
-            title: 'Migas Mutations',
+            title: 'Migas Purchases',
               text: '<span><i class="fas fa-print"></i></span>  Print',
               exportOptions: {
                 columns: [0, 1, 2, 3, 4, 5]
@@ -423,7 +512,7 @@
           {
               extend: 'excel',
               
-              title: 'Migas Mutations',
+              title: 'Migas Purchases',
               text: '<span><i class="fas fa-download"></i></span>  Download as Excel',
               exportOptions: {
                 columns: [0, 1, 2, 3, 4, 5]
@@ -466,9 +555,11 @@
       });
       table.draw();
     });
+  
   $(document).on('click', '#btnAdd', function(){
     $("#ModalAdd").modal('show',{backdrop: 'true'});
   });
+
   $(document).ready(function() {
     toastr.options = {
             "closeButton":false,
@@ -495,6 +586,7 @@
       toastr.error("{{ session('error') }}")
     @endif
   });
+  
 </script>
 @if(isset($d))
   @for ($i = 0; $i <= $d->id; $i++)
