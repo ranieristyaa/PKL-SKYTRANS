@@ -39,7 +39,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          
+               <li class="nav-header">Home</li>
           <li class="nav-item">
             <a href="/superadmin/home" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
@@ -48,7 +48,8 @@
                 
               </p>
             </a>
-          </li>
+          </li>'
+          <li class="nav-header">Kelola Data</li>
           <li class="nav-item">
             <a href="/superadmin/dataadmin" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
@@ -147,7 +148,25 @@
                
           </li>
           </ul>
-          
+          <li class="nav-header">Akun</li>
+        <li class="nav-item">
+            <a href="/superadmin/pengaturan_akun" class="nav-link">
+              <i class="nav-icon fas fa-user-cog"></i>
+              <p>
+                Pengaturan Akun
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/superadmin/log" class="nav-link">
+              <i class="nav-icon fas fa-history"></i>
+              <p>
+                Log Pengguna
+                
+              </p>
+            </a>
+          </li>
 
 
        
@@ -287,7 +306,7 @@
                                             @csrf
                                             <div class="form-group" 
                                             @error('name') style="border: 1px solid rgb(255, 0, 0)" @enderror>
-                                              <label for="name"><span class="fas fa-user"></span> Nama Barang</label>
+                                              <label for="name"><span class="fas fa-box"></span> Nama Barang</label>
                                               <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama barang" 
                                               value= "{{ old('name') !== null ?  old('name') : "$d->name" }}" required>
                                               <span class="text-danger">
@@ -393,7 +412,7 @@
                     @csrf
                     <div class="form-group" 
                     @error('name') style="border: 1px solid rgb(255, 0, 0)" @enderror>
-                      <label for="name"><span class="fas fa-user"></span> Nama Barang</label>
+                      <label for="name"><span class="fas fa-box"></span> Nama Barang</label>
                       <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama barang" value="{{ old('name') }}" required>
                       <span class="text-danger">
                         @error('name')
@@ -574,6 +593,7 @@
   });
   
 </script>
+@if(isset($d)){
   @for ($i = 0; $i <= $d->id; $i++)
   <script>
   $(document).on('click', '#btnDelete-{{ $i }}', function(){
@@ -584,6 +604,8 @@
   });
   </script>
   @endfor
+}
+@endif
 @endsection
 
 @include('partials.admin-footer')

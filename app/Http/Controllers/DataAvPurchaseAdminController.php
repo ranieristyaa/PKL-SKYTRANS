@@ -22,6 +22,7 @@ class DataAvPurchaseAdminController extends Controller
             'date' => 'required',
             'name' => 'required',
             'quantity' => 'required',
+            
             'price' => 'required',
         );
         $messages = array(
@@ -58,8 +59,10 @@ class DataAvPurchaseAdminController extends Controller
             'date' => $request->date,
             'name' => $request->name,
             'quantity' => $request->quantity,
+            'price_per_item' => $request->price,
             'price' => $request->price,
             'aviasi_stock_id' => $id2,
+            'person_in_charge' => $request->pic,
         ]);
 
         $last = \DB::table('aviasi_purchases')->latest('id')->first();
@@ -72,6 +75,7 @@ class DataAvPurchaseAdminController extends Controller
             'item_out' => 0,
             'aviasi_purchase_id' => $id,
             'aviasi_stock_id' => $id2,
+            'person_in_charge' => $request->pic,
         ]);
         
         return redirect('/admin/pembelian/aviasi')->with('success', 'Data berhasil ditambahkan');
@@ -82,6 +86,7 @@ class DataAvPurchaseAdminController extends Controller
             'date' => 'required',
             'name' => 'required',
             'quantity' => 'required',
+            'price_per_item' => 'required',
             'price' => 'required',
         );
         $messages = array(
@@ -108,13 +113,16 @@ class DataAvPurchaseAdminController extends Controller
             'name' => $request->name,
             'item_in' => $request->quantity,
             'item_out' => 0,
+            'person_in_charge' => $request->pic,
         ]);
 
         AviasiPurchase::where('id', $purchase->id)->update([
         'date' => $request->date,
         'name' => $request->name,
         'quantity' => $request->quantity,
+        'price_per_item' => $request->price,
         'price' => $request->price,
+        'person_in_charge' => $request->pic,
         
         ]);
         return redirect('/admin/pembelian/aviasi')->with('success', 'Data berhasil diupdate');

@@ -39,7 +39,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          
+          <li class="nav-header">Home</li>
           <li class="nav-item">
             <a href="/admin/home" class="nav-link active">
               <i class="nav-icon fas fa-home"></i>
@@ -49,7 +49,8 @@
               </p>
             </a>
           </li>
-
+          <li class="nav-header">Kelola Data</li>
+          
 
 
           <li class="nav-item">
@@ -149,11 +150,21 @@
 
 
         </ul>
+        <li class="nav-header">Akun</li>
         <li class="nav-item">
-          <a href="/admin/proyek" class="nav-link">
-              <i class="nav-icon fas fa-ellipsis-h"></i>
+            <a href="/admin/pengaturan_akun" class="nav-link">
+              <i class="nav-icon fas fa-user-cog"></i>
               <p>
-              Proyek Migas
+                Pengaturan Akun
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/log" class="nav-link">
+              <i class="nav-icon fas fa-history"></i>
+              <p>
+                Log Pengguna
                 
               </p>
             </a>
@@ -208,24 +219,17 @@
             <div class="shadow-lg card">
               <div class="card-header border-0">
                 <div class="d-flex justify-content-between">
-                  <h3 class="card-title" style="font-weight: 700;">Progress Proyek Migas</h3>
+                  <h3 class="card-title" style="font-weight: 700;">Pembelian Barang</h3>
              
                 </div>
               </div>
+              <br>
               <div class="card-body" style="padding: 0rem 2rem 1.2rem 1.5rem;">
-                <div class="d-flex">
-                 
-                  <p class="ml-auto d-flex flex-column text-right">
-                    <span class="text-success">
-                      <i class="fas fa-arrow-up"></i> 10%
-                    </span>
-                    <span class="text-muted">Since last week</span>
-                  </p>
-                </div>
+                
                 <!-- /.d-flex -->
 
                 <div class="position-relative mb-4">
-                  <canvas id="visitors-chart" height="300"></canvas>
+                  <canvas id="visitors-chart" height="350"></canvas>
                 </div>
 
                
@@ -308,7 +312,8 @@
                   $a = \DB::table('aviasi_stocks')->latest('created_at')->first();
                   $b = \DB::table('aviasi_stocks')->latest('updated_at')->first();
                   $c = \DB::table('activity_log')->where('log_name', 'Aviasi Stock')->where('event', '=', 'deleted')->orderBy('created_at', 'desc')->first();
-                  $d = json_decode($c->properties);
+                  if( $c != null)
+                     $d = json_decode($c->properties);
                 @endphp
               
                  
@@ -322,7 +327,7 @@
                     <span class="font-weight-bold">
                        Terakhir Ditambahkan
                     </span>
-                    <span class="text-info">{{ $a->name }}</span>
+                    <span class="text-info">{{ $a == null ? '-' : $a->name }}</span>
                   </p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
@@ -334,7 +339,7 @@
                     <span class="font-weight-bold">
                        Terakhir Diperbarui
                     </span>
-                    <span class="text-info">{{ $b->name }}</span>
+                    <span class="text-info">{{ $b == null ? '-' : $b->name }}</span>
                   </p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
@@ -346,7 +351,7 @@
                     <span class="font-weight-bold">
                        Terakhir Dihapus
                     </span>
-                    <span class="text-info">{{ $d->old->name }}</span>
+                    <span class="text-info">{{ $d == null ? $d->old->name : '-' }}</span>
                   </p>
                 </div>
                 
@@ -381,7 +386,7 @@
                     <span class="font-weight-bold">
                        Terakhir Masuk
                     </span>
-                    <span class="text-info">{{ $a->name }}</span>
+                    <span class="text-info">{{ $a == null ? '-' : $a->name }}</span>
                   </p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
@@ -393,7 +398,7 @@
                     <span class="font-weight-bold">
                        Terakhir Diperbarui
                     </span>
-                    <span class="text-info">{{ $b->name }}</span>
+                    <span class="text-info">{{ $b == null ? '-' : $b->name }}</span>
                   </p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
@@ -431,6 +436,17 @@
 
 <div class="card-body p-0" style="display: block;">
 <ul class="products-list product-list-in-card  pr-2" >
+@if($data5->count() == 0)
+  <li class="item">
+<div class="product-info" style="margin-left: 0;" >
+<center>
+  <a href="javascript:void(0)" class="product-title">No data.</a>
+</center>
+
+</div>
+</li>
+
+@endif
 @foreach($data5->take(5) as $d)
 <li class="item">
 <div class="product-info" style="margin-left: 20px;">
@@ -479,5 +495,83 @@ $en = json_decode($d->properties);
   
 </div>
 <!-- ./wrapper -->
+@php
 
+$a = array();
+for($i=0;$i<=12;$i++){
+  $a[] = \DB::table('aviasi_purchases')->whereMonth('date', $i+1)->sum('price');
+
+}
+
+$m = array();
+for($i=0;$i<=12;$i++){
+  $m[] = \DB::table('migas_purchases')->whereMonth('date', $i+1)->sum('total_price');
+
+}
+
+@endphp
+
+@section('script')
+<script>
+$(function () {
+   var $visitorsChart = $('#visitors-chart')
+  // eslint-disable-next-line no-unused-vars
+  var visitorsChart = new Chart($visitorsChart, {
+    type: 'line',
+    data: {
+      labels: ['Januari', 'Febuari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', ' Oktober', 'November', 'Desember'],
+      datasets: [{
+        data: [{{ $m[0] }}, {{ $m[1] }}, {{ $m[2] }}, {{ $m[3] }}, {{ $m[4] }}, {{ $m[5] }}, {{ $m[6] }}, {{ $m[7] }}, {{ $m[8] }}, {{ $m[9] }}, {{ $m[10] }}, {{ $m[11] }}, {{ $m[12] }}],
+        label: 'barang migas',
+        borderColor: '#3e95cd',
+        fill: false,
+        // pointHoverBackgroundColor: '#007bff',
+        // pointHoverBorderColor    : '#007bff'
+      },
+      {
+        data: [{{ $a[0] }},{{ $a[1] }}, {{ $a[2] }}, {{ $a[3] }}, {{ $a[4] }}, {{ $a[5] }}, {{ $a[6] }}, {{ $a[7] }}, {{ $a[8] }}, {{ $a[9] }}, {{ $a[10] }}, {{ $a[11] }}, {{ $a[12] }}],
+        label: 'barang aviasi',
+        borderColor: 'orange',
+        fill: false,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Chart.js Line Chart'
+        }
+      },
+      scales: {
+        xAxes: [{
+          display: true,
+          scaleLabel: {
+              display: true,
+              labelString: 'Bulan'
+          }
+      }],
+  yAxes: [{
+          display: true,
+          ticks: {
+              beginAtZero: true,
+              steps: 10,
+              stepValue: 5,
+              max: 5000000
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Total Pengeluaran (Rp)'
+        }
+      }]
+      }
+    }
+  })
+})
+</script>
+@endsection
 @include('partials.admin-footer')

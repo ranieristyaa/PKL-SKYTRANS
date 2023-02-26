@@ -39,9 +39,9 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          
+               <li class="nav-header">Home</li>
           <li class="nav-item">
-            <a href="/superadmin/home" class="nav-link">
+            <a href="/admin/home" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Dashboard
@@ -49,15 +49,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="/superadmin/dataadmin" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-              Manajemen Akun
-                
-              </p>
-            </a>
-          </li>
+          <li class="nav-header">Kelola Data</li>
+          
           <li class="nav-item">
             <a href="" class="nav-link">
               <i class="nav-icon fas fa-box-open"></i>
@@ -68,13 +61,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item ">
-                <a href="/superadmin/stock/aviasi" class="nav-link" >
+                <a href="/admin/stock/aviasi" class="nav-link" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/superadmin/stock/migas" class="nav-link">
+                <a href="/admin/stock/migas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas</p>
                 </a>
@@ -83,7 +76,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="/superadmin/rental" class="nav-link">
+            <a href="/admin/rental" class="nav-link">
               <i class="nav-icon fas fa-clipboard-list"></i>
               <p>
                 Data Peminjaman Aviasi
@@ -101,13 +94,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/superadmin/pembelian/aviasi" class="nav-link" >
+                <a href="/admin/pembelian/aviasi" class="nav-link" >
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/superadmin/pembelian/migas" class="nav-link active" style="background-color: #9cc5f0;">
+                <a href="/admin/pembelian/migas" class="nav-link active" style="background-color: #9cc5f0;">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas
                  
@@ -131,13 +124,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/superadmin/mutasi/aviasi" class="nav-link">
+                <a href="/admin/mutasi/aviasi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/superadmin/mutasi/migas" class="nav-link">
+                <a href="/admin/mutasi/migas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas
                  
@@ -147,7 +140,25 @@
                 
           </li>
           </ul>
-          
+          <li class="nav-header">Akun</li>
+        <li class="nav-item">
+            <a href="/admin/pengaturan_akun" class="nav-link">
+              <i class="nav-icon fas fa-user-cog"></i>
+              <p>
+                Pengaturan Akun
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/log" class="nav-link">
+              <i class="nav-icon fas fa-history"></i>
+              <p>
+                Log Pengguna
+                
+              </p>
+            </a>
+          </li>
 
 
 
@@ -214,6 +225,7 @@
                       <th>Jumlah</th>
                       <th>Harga Satuan</th>
                       <th>Total Harga</th>
+                      <th>Penanggung Jawab</th>
                     
                       <th>Action</th>
                     </tr>
@@ -227,6 +239,7 @@
                       <td>{{ $d->quantity }}</td>
                       <td>{{ $d->price_per_item }}</td>
                       <td>{{ $d->total_price }}</td>
+                      <td>{{ $d->person_in_charge }}</td>
                      
                       <td style="text-align: center;">
                       <button class="btn btn-info" data-toggle="modal"  id="btnEdit-{{ $d->id }}"
@@ -262,7 +275,7 @@
                                           <div class="modal-footer">
                                               <button type="button" class="btn btn-light btn-sm"
                                                   data-dismiss="modal">Batal</button>
-                                              <form action="/superadmin/pembelian/migas/{{ $d->id }}" method="post"
+                                              <form action="/admin/pembelian/migas/{{ $d->id }}" method="post"
                                                   class="d-inline">
                                                   @method('delete')
                                                   @csrf
@@ -286,7 +299,7 @@
                                                               </button>
                                 </div>
                                 <div class="modal-body">
-                            <form action="/superadmin/pembelian/migas/{{ $d->id }}" name="modal_popup" enctype="multipart/form-data" method="post">
+                            <form action="/admin/pembelian/migas/{{ $d->id }}" name="modal_popup" enctype="multipart/form-data" method="post">
                                     @method('PUT')
                                     @csrf
                                     <div class="form-group"  
@@ -352,7 +365,17 @@
                                               value= "{{ $d->quantity }}" required>
                                             
                                             </div>
-                                  
+                                            <div class="form-group" 
+                                    @error('pic') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                                      <label for="pic"><span class="fas fa-user"></span> Nama Penanggung Jawab</label>
+                                      <input type="text" class="form-control" id="pic" name="pic" placeholder="Masukkan nama penanggung jawab." 
+                                      value= "{{ old('pic') !== null ?  old('pic') : "$d->person_in_charge" }}" required>
+                                      <span class="text-danger">
+                                        @error('pic')
+                                          {{ $message }}
+                                        @enderror
+                                      </span>
+                                    </div>
                           
                                <small><p>Dengan mengedit data, data mutasi barang masuk dan jumlah stock barang terkait akan terupdate.</p></small>
                               <div class="modal-footer">
@@ -401,7 +424,7 @@
                                               </button>
                 </div>
                 <div class="modal-body">
-						<form action="/superadmin/pembelian/migas" name="modal_popup" enctype="multipart/form-data" method="post">
+						<form action="/admin/pembelian/migas" name="modal_popup" enctype="multipart/form-data" method="post">
                     @csrf
                     <div class="form-group"  
                     @error('date') style="border: 1px solid rgb(255, 0, 0)" @enderror>
@@ -455,7 +478,17 @@
                         @enderror
                       </span>
                     </div>
-                  
+                    <div class="form-group" 
+                                    @error('pic') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                                      <label for="pic"><span class="fas fa-user"></span> Nama Penanggung Jawab</label>
+                                      <input type="text" class="form-control" id="pic" name="pic" placeholder="Masukkan nama penanggung jawab." 
+                                      value= "{{ old('pic') }}" required>
+                                      <span class="text-danger">
+                                        @error('pic')
+                                          {{ $message }}
+                                        @enderror
+                                      </span>
+                                    </div>
 					
                     <small><p>Dengan menambahkan data, data mutasi barang masuk akan ter-generate dan jumlah stock barang terkait akan terupdate.</p></small>
 							<div class="modal-footer">

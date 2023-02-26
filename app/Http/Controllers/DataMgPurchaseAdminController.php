@@ -158,4 +158,5 @@ class DataMgPurchaseAdminController extends Controller
         return redirect('/admin/pembelian/migas')->with('success', 'Data berhasil dihapus');
     }
         
+       
 }

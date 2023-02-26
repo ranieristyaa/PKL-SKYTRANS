@@ -77,48 +77,7 @@ $(function () {
     }
   })
 
-  var $visitorsChart = $('#visitors-chart')
-  // eslint-disable-next-line no-unused-vars
-  var visitorsChart = new Chart($visitorsChart, {
-    type: 'horizontalBar',
-    data: {
-      labels: ['week-1', 'week-2 (now)', 'week-3', 'week-4',],
-      datasets: [{
-        axis: 'y',
-        fill: false,
-        label: 'Progress',
-        data: [10, 20, 0, 0,],
-        backgroundColor: ['rgba(255, 99, 132, 0.2)',
-        'rgba(255, 99, 132, 0.2)'
-        ],
-        borderColor: [ 'rgb(255, 99, 132)',
-        'rgb(255, 99, 132)'
-      ],
-        borderWidth: 1
-        // pointHoverBackgroundColor: '#007bff',
-        // pointHoverBorderColor    : '#007bff'
-      }]
-    },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        
-        xAxes: [{
-                display: true,
-                ticks: {
-                    beginAtZero: true,
-                    max: 100
-                },
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Persentage'
-                },
-            }]
-    }
-    }
-  })
+
 })
 
 // lgtm [js/unused-local-variable]

@@ -13,7 +13,8 @@ class DataAvRentalController extends Controller
     public function index()
     {
         return view('superadmin.aviasi-rental', [
-            'data' => AviasiRental::all()
+            'data' => AviasiRental::all(),
+            'stock' => AviasiStock::all(),
         ]);
     }
 

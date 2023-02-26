@@ -39,7 +39,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          
+               <li class="nav-header">Home</li>
           <li class="nav-item">
             <a href="/superadmin/home" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
@@ -49,6 +49,7 @@
               </p>
             </a>
           </li>
+          <li class="nav-header">Kelola Data</li>
           <li class="nav-item">
             <a href="/superadmin/dataadmin" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
@@ -147,7 +148,25 @@
                 
           </li>
           </ul>
-          
+          <li class="nav-header">Akun</li>
+        <li class="nav-item">
+            <a href="/superadmin/pengaturan_akun" class="nav-link">
+              <i class="nav-icon fas fa-user-cog"></i>
+              <p>
+                Pengaturan Akun
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/superadmin/log" class="nav-link">
+              <i class="nav-icon fas fa-history"></i>
+              <p>
+                Log Pengguna
+                
+              </p>
+            </a>
+          </li>
 
 
 
@@ -214,6 +233,7 @@
                       <th>Jumlah</th>
                       <th>Harga Satuan</th>
                       <th>Total Harga</th>
+                      <th>Penanggung Jawab</th>
                     
                       <th>Action</th>
                     </tr>
@@ -227,6 +247,7 @@
                       <td>{{ $d->quantity }}</td>
                       <td>{{ $d->price_per_item }}</td>
                       <td>{{ $d->total_price }}</td>
+                      <td>{{ $d->person_in_charge }}</td>
                      
                       <td style="text-align: center;">
                       <button class="btn btn-info" data-toggle="modal"  id="btnEdit-{{ $d->id }}"
@@ -302,7 +323,7 @@
                                     </div>
                                     <div class="form-group" 
                                     @error('name') style="border: 1px solid rgb(255, 0, 0)" @enderror>
-                                      <label for="name"><span class="fas fa-user"></span> Nama Barang</label>
+                                      <label for="name"><span class="fas fa-box"></span> Nama Barang</label>
                                       <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama barang" 
                                       value= "{{ old('name') !== null ?  old('name') : "$d->name" }}" required>
                                       <span class="text-danger">
@@ -352,7 +373,17 @@
                                               value= "{{ $d->quantity }}" required>
                                             
                                             </div>
-                                  
+                                            <div class="form-group" 
+                                    @error('pic') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                                      <label for="pic"><span class="fas fa-user"></span> Nama Penanggung Jawab</label>
+                                      <input type="text" class="form-control" id="pic" name="pic" placeholder="Masukkan nama penanggung jawab." 
+                                      value= "{{ old('pic') !== null ?  old('pic') : "$d->person_in_charge" }}" required>
+                                      <span class="text-danger">
+                                        @error('pic')
+                                          {{ $message }}
+                                        @enderror
+                                      </span>
+                                    </div>
                           
                                <small><p>Dengan mengedit data, data mutasi barang masuk dan jumlah stock barang terkait akan terupdate.</p></small>
                               <div class="modal-footer">
@@ -415,7 +446,7 @@
                     </div>
                     <div class="form-group" 
                     @error('name') style="border: 1px solid rgb(255, 0, 0)" @enderror>
-                      <label for="name"><span class="fas fa-user"></span> Nama Barang</label>
+                      <label for="name"><span class="fas fa-box"></span> Nama Barang</label>
                       <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama barang" value="{{ old('name') }}" required>
                       <span class="text-danger">
                         @error('name')
@@ -455,7 +486,17 @@
                         @enderror
                       </span>
                     </div>
-                  
+                    <div class="form-group" 
+                                    @error('pic') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                                      <label for="pic"><span class="fas fa-user"></span> Nama Penanggung Jawab</label>
+                                      <input type="text" class="form-control" id="pic" name="pic" placeholder="Masukkan nama penanggung jawab." 
+                                      value= "{{ old('pic') }}" required>
+                                      <span class="text-danger">
+                                        @error('pic')
+                                          {{ $message }}
+                                        @enderror
+                                      </span>
+                                    </div>
 					
                     <small><p>Dengan menambahkan data, data mutasi barang masuk akan ter-generate dan jumlah stock barang terkait akan terupdate.</p></small>
 							<div class="modal-footer">

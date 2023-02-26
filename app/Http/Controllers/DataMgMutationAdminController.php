@@ -76,10 +76,11 @@ class DataMgMutationAdminController extends Controller
         MigasMutation::create([
             'date' => $request->date,
             'name' => $request->name,
-            'description' => $request->description,
+            
             'item_in' => $request->item_in,
             'item_out' => $request->item_out,
             'migas_stock_id' => $id2,
+            'person_in_charge' => $request->pic,
             
         ]);
         return redirect('/admin/mutasi/migas')->with('success', 'Data berhasil ditambahkan');
@@ -89,7 +90,7 @@ class DataMgMutationAdminController extends Controller
         $rules = array(
             'date' => 'required',
             'name' => 'required',
-            'description' => 'required',
+         
             'item_in' => 'required',
             'item_out' => 'required',
         );
@@ -111,9 +112,10 @@ class DataMgMutationAdminController extends Controller
             MigasPurchase::where('id', $mutation->migas_purchase_id)->update([
                 'date' => $request->date,
                 'name' => $request->name,
-                'quantity' => $request->quantity,
-                'price_per_item' => $request->price_per_item,
-                'total_price' => $request->total_price,
+                'quantity' => $request->item_in,
+           
+               
+                'person_in_charge' => $request->pic,
 
             ]);
         }
@@ -124,7 +126,7 @@ class DataMgMutationAdminController extends Controller
         'description' => $request->description,
         'item_in' => $request->item_in,
         'item_out' => $request->item_out,
-        
+        'person_in_charge' => $request->pic,
         ]);
         return redirect('/admin/mutasi/migas')->with('success', 'Data berhasil diupdate');
     }

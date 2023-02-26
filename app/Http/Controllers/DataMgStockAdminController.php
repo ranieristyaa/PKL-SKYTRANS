@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\MigasStock;
 use Validator;
+use App\Models\MigasMutation;
+use App\Models\MigasPurchase;
+
 
 class DataMgStockAdminController extends Controller
 {
@@ -79,6 +82,17 @@ class DataMgStockAdminController extends Controller
             ->withInput();
         }
 
+        MigasPurchase::where('migas_stock_id', $stock->id)->update([
+            'name' => $request->name,
+            
+        ]);
+
+        MigasMutation::where('migas_stock_id', $stock->id)->update([
+            'name' => $request->name,
+            
+        ]);
+
+
         MigasStock::where('id', $stock->id)->first()?->update([
         'name' => $request->name,
         'description' => $request->description,
@@ -91,6 +105,9 @@ class DataMgStockAdminController extends Controller
     }
 
     public function destroy(MigasStock $stock){
+
+        MigasMutation::where('migas_stock_id', $stock->id)->delete();
+        MigasPurchase::where('migas_stock_id', $stock->id)->delete();
         MigasStock::destroy($stock->id);
         return redirect('/admin/stock/migas')->with('success', 'Data berhasil dihapus');
     }

@@ -6,64 +6,18 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
-use Illuminate\Support\Facades\Auth;
 use Validator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-
-class DataUserController extends Controller
+class PengaturanController extends Controller
 {
-    public function index()
-    {
-        return view('superadmin.user', [
-            'data' => User::all()
+    public function index(){
+        return view('superadmin.akun', [
+            'data' => User::where('id', Auth::user()->id)
         ]);
     }
-
-    public function destroy(User $user){
-        User::destroy($user->id);
-        return redirect('/superadmin/dataadmin')->with('success', 'Akun berhasil dihapus');
-    }
-
-    public function store(Request $request){
-        $rules = array(
-            'name' => 'required',
-            'email' => ['required', 'email:rfc,dns', Rule::unique('users', 'email')],
-            'role_id' => 'required',
-            'password' => ['required', Password::min(5)->numbers()->symbols(), 'confirmed'],
-        );
-        $messages = array(
-        
-            'name.required' => 'Username wajib diisi.',
-            'email.required' => 'Email wajib diisi',
-            'email.email' => 'Email tidak sesuai',
-            'email.unique' => 'Email sudah dipakai oleh pengguna lain.',
-            'email.unique' => 'Email sudah dipakai',
-            'role_id.required' => 'Pilih salah satu role',
-            'password.confirmed' => 'Password tidak sesuai',
-            'password.min' => 'Password minimal 5 karakter',
-            'password.mixedCase' => 'Password harus disertai dengan satu huruf besar dan simbol',
-            'password.symbols' => 'Password harus disertai dengan satu huruf besar dan simbol',
-        );
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if ($validator->fails()){
-            return redirect('/superadmin/dataadmin')->with('error', 'Input data gagal, mohon periksa kembali.')
-            ->withErrors($validator)
-            ->withInput();
-        }
-
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'role_id' => $request->role_id,
-            'password' => Hash::make($request->password),
-        ]);
-        return redirect('/superadmin/dataadmin')->with('success', 'Akun berhasil ditambahkan');
-    }
-
     public function update(Request $request, User $user){
-
         if($request->password != ''){
         
             $old = User::where('id', Auth::user()->id)->first();
@@ -90,7 +44,7 @@ class DataUserController extends Controller
             $validator = Validator::make($request->all(), $rules, $messages);
 
             if ($validator->fails()){
-                return redirect('/superadmin/dataadmin')->with('error', 'Input data gagal, mohon periksa kembali.')
+                return redirect('/superadmin/pengaturan_akun')->with('error', 'Input data gagal, mohon periksa kembali.')
                 ->withErrors($validator)
                 ->withInput();
             }
@@ -126,7 +80,7 @@ class DataUserController extends Controller
                 $validator = Validator::make($request->all(), $rules, $messages);
 
             if ($validator->fails()){
-                return redirect('/superadmin/dataadmin')->with('error', 'Input data gagal, mohon periksa kembali.')
+                return redirect('/superadmin/pengaturan_akun')->with('error', 'Input data gagal, mohon periksa kembali.')
                 ->withErrors($validator)
                 ->withInput();
             }
@@ -174,7 +128,7 @@ class DataUserController extends Controller
             ], $rules, $messages);
 
             if ($validator->fails()){
-                return redirect('/superadmin/dataadmin')->with('error', 'Input data gagal, mohon periksa kembali.')
+                return redirect('/superadmin/pengaturan_akun')->with('error', 'Input data gagal, mohon periksa kembali.')
                 ->withErrors($validator)
                 ->withInput();
             }
@@ -208,7 +162,7 @@ class DataUserController extends Controller
                 ], $rules, $messages);
     
                 if ($validator->fails()){
-                    return redirect('/superadmin/dataadmin')->with('error', 'Input data gagal, mohon periksa kembali.')
+                    return redirect('/superadmin/pengaturan_akun')->with('error', 'Input data gagal, mohon periksa kembali.')
                     ->withErrors($validator)
                     ->withInput();
                 }
@@ -225,6 +179,6 @@ class DataUserController extends Controller
            
         }
 
-        return redirect('/superadmin/dataadmin')->with('success', 'Akun berhasil diupdate');
+        return redirect('/superadmin/pengaturan_akun')->with('success', 'Akun berhasil diupdate');
     }
 }

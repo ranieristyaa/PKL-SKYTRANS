@@ -78,6 +78,7 @@ class DataAvMutationController extends Controller
             'item_in' => $request->item_in,
             'item_out' => $request->item_out,
             'aviasi_stock_id' => $id2,
+            'person_in_charge' => $request->pic,
         ]);
         return redirect('/superadmin/mutasi/aviasi')->with('success', 'Data berhasil ditambahkan');
     }
@@ -85,14 +86,14 @@ class DataAvMutationController extends Controller
     public function update(Request $request, AviasiMutation $mutation){
         $rules = array(
             'date' => 'required',
-            'name' => 'required',
-            'description' => 'required',
+           
+            
             'item_in' => 'required',
             'item_out' => 'required',
         );
         $messages = array(
             'date.required' => 'Tanggal wajib diisi.',
-            'name.required' => 'Username wajib diisi.',
+           
             'item_in.required' => "Jumlah wajib diisi",
             'item_out.required' => 'Jumlah wajib diisi',
         );
@@ -108,8 +109,8 @@ class DataAvMutationController extends Controller
             AviasiPurchase::where('id', $mutation->aviasi_purchase_id)->update([
                 'date' => $request->date,
                 'name' => $request->name,
-                'quantity' => $request->quantity,
-                'price' => $request->price,
+                'quantity' => $request->item_in,
+                'person_in_charge' => $request->pic,
 
             ]);
         }
@@ -120,7 +121,7 @@ class DataAvMutationController extends Controller
         'description' => $request->description,
         'item_in' => $request->item_in,
         'item_out' => $request->item_out,
-        
+        'person_in_charge' => $request->pic,
         ]);
         return redirect('/superadmin/mutasi/aviasi')->with('success', 'Data berhasil diupdate');
     }

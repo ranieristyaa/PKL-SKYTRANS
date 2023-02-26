@@ -36,10 +36,10 @@
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" name="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          
+               <li class="nav-header">Home</li>
           <li class="nav-item">
             <a href="/superadmin/home" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
@@ -49,6 +49,7 @@
               </p>
             </a>
           </li>
+          <li class="nav-header">Kelola Data</li>
           <li class="nav-item">
             <a href="/superadmin/dataadmin" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
@@ -147,7 +148,25 @@
                 
           </li>
           </ul>
-          
+          <li class="nav-header">Akun</li>
+        <li class="nav-item">
+            <a href="/superadmin/pengaturan_akun" class="nav-link">
+              <i class="nav-icon fas fa-user-cog"></i>
+              <p>
+                Pengaturan Akun
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/superadmin/log" class="nav-link">
+              <i class="nav-icon fas fa-history"></i>
+              <p>
+                Log Pengguna
+                
+              </p>
+            </a>
+          </li>
 
 
 
@@ -237,9 +256,9 @@
                       </td>
 
                       {{-- Modal Decline --}}
-                              <div class="modal fade bd-example-modal-sm" id="modal-delete-{{ $d->id }}" tabindex="-1" role="dialog"
+                              <div class="modal fade bd-example-modal-sm" id="modal-delete-{{ $d->id }}" tabindex="-1" name="dialog"
                                   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-dialog modal-dialog-centered" name="document">
                                       <div class="modal-content">
                                           <div class="modal-header">
                                               <h4 class="modal-title" id="exampleModalLongTitle" style="font-size: 1.25rem;">
@@ -299,18 +318,21 @@
                                         @enderror
                                       </span>
                                     </div>
-                                    <div class="form-group" 
-                                    @error('name') style="border: 1px solid rgb(255, 0, 0)" @enderror>
-                                      <label for="name"><span class="fas fa-user"></span> Nama Barang</label>
-                                      <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama barang" 
-                                      value= "{{ old('name') !== null ?  old('name') : "$d->name" }}" required>
-                                      <span class="text-danger">
-                                        @error('name')
-                                          {{ $message }}
-                                        @enderror
-                                      </span>
-                                    </div>
-                                   
+                                    <div class="form-group"
+                                              @error('name') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                                                <label for="name_id"><span class="fas fa-box"></span> Nama Barang</label><br>
+                                                <select name="name" id="name" class="form-control"  required style="width: 466px; margin-left:0;">
+                                                  <option value="" disabled selected>Pilih barang</option>
+                                                  @foreach($stock as $s)
+                                                  <option value="{{ $s->name }}" {{ old('name') == '$s->name' ? 'selected' : '' }}>{{ $s->name }}</option>
+                                                  @endforeach
+                                                </select>
+                                                <span class="text-danger">
+                                                  @error('name')
+                                                    {{ $message }}
+                                                  @enderror
+                                                </span>
+                                              </div>
                           
                                     <div class="form-group"
                                     @error('quantity') style="border: 1px solid rgb(255, 0, 0)" @enderror>
@@ -422,16 +444,21 @@
                         @enderror
                       </span>
                     </div>
-                    <div class="form-group" 
-                    @error('name') style="border: 1px solid rgb(255, 0, 0)" @enderror>
-                      <label for="name"><span class="fas fa-box"></span> Nama Barang</label>
-                      <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama barang" value="{{ old('name') }}" required>
-                      <span class="text-danger">
-                        @error('name')
-                          {{ $message }}
-                        @enderror
-                      </span>
-                    </div>
+                    <div class="form-group"
+                                              @error('name') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                                                <label for="name_id"><span class="fas fa-box"></span> Nama Barang</label><br>
+                                                <select name="name" id="name" class="form-control"  required style="width: 466px; margin-left:0;">
+                                                  <option value="" disabled selected>Pilih barang</option>
+                                                  @foreach($stock as $s)
+                                                  <option value="{{ $s->name }}" {{ old('name') == '$s->name' ? 'selected' : '' }}>{{ $s->name }}</option>
+                                                  @endforeach
+                                                </select>
+                                                <span class="text-danger">
+                                                  @error('name')
+                                                    {{ $message }}
+                                                  @enderror
+                                                </span>
+                                              </div>
                     
           
                     <div class="form-group"
@@ -457,7 +484,7 @@
                     <div class="form-group"  
                     @error('time') style="border: 1px solid rgb(255, 0, 0)" @enderror>
                       <label for="time"><span class="fas fa-clock"></span> Jangka Waktu</label>
-                      <input type="number" class="form-control" id="time" name="time" placeholder="Masukkan jangka waktu peminjaman" value="{{ old('time') }}" >
+                      <input type="number" class="form-control" id="time" name="time" placeholder="Masukkan jangka waktu peminjaman (hari)" value="{{ old('time') }}" >
                       <span class="text-danger">
                         @error('time')
                           {{ $message }}

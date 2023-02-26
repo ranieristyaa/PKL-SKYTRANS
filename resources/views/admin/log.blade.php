@@ -31,7 +31,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          
+               <li class="nav-header">Home</li>
           <li class="nav-item">
             <a href="/admin/home" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
@@ -41,7 +41,8 @@
               </p>
             </a>
           </li>
-
+          <li class="nav-header">Kelola Data</li>
+          
 
 
           <li class="nav-item">
@@ -140,7 +141,25 @@
 
 
         </ul>
-        
+        <li class="nav-header">Akun</li>
+        <li class="nav-item">
+            <a href="/admin/pengaturan_akun" class="nav-link">
+              <i class="nav-icon fas fa-user-cog"></i>
+              <p>
+                Pengaturan Akun
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/log" class="nav-link active">
+              <i class="nav-icon fas fa-history"></i>
+              <p>
+                Log Pengguna
+                
+              </p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>

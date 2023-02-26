@@ -139,8 +139,7 @@
                         </span>
               </div>
               
-
-              <p class="small mb-5 pb-lg-2"><a class="text-blue-50" href="#!">Forgot password?</a></p>
+            <br>
 
               <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
               </form>

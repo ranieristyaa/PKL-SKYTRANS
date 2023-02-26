@@ -23,6 +23,9 @@ use App\Http\Controllers\DataAvMutationAdminController;
 use App\Http\Controllers\DataMgMutationAdminController;
 use App\Http\Controllers\LogAktivitasAdminController;
 use App\Http\Controllers\ProyekController;
+use App\Http\Controllers\LogAllUserController;
+use App\Http\Controllers\PengaturanController;
+use App\Http\Controllers\PengaturanAdmController;
 
 
 /*
@@ -73,6 +76,9 @@ Route::prefix('superadmin')->group(function () {
         Route::resource('/rental', DataAvRentalController::class, ['parameters' => ['rental' => 'rental']]);
         Route::get('/log', [LogAktivitasController::class, 'index']);
         Route::get('/proyek', [ProyekController::class, 'index']);
+        Route::get('/log_all_user', [LogAllUserController::class, 'index']);
+        Route::get('/pengaturan_akun', [PengaturanController::class, 'index']);
+        Route::post('/pengaturan_akun', [PengaturanController::class, 'update']);
     });
 });
 
@@ -102,6 +108,8 @@ Route::prefix('admin')->group(function () {
         Route::resource('/mutasi/migas', DataMgMutationAdminController::class, ['parameters' => ['migas' => 'mutation']]);
         Route::resource('/rental', DataAvRentalAdminController::class, ['parameters' => ['rental' => 'rental']]);
         Route::get('/log', [LogAktivitasAdminController::class, 'index']);
+        Route::get('/pengaturan_akun', [PengaturanAdmController::class, 'index']);
+        Route::post('/pengaturan_akun', [PengaturanAdmController::class, 'update']);
     });
 });
 

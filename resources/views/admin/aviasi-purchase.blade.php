@@ -39,7 +39,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          
+               <li class="nav-header">Home</li>
           <li class="nav-item">
             <a href="/admin/home" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
@@ -49,15 +49,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="/admin/dataadmin" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-              Manajemen Akun
-                
-              </p>
-            </a>
-          </li>
+          <li class="nav-header">Kelola Data</li>
+          
           <li class="nav-item">
             <a href="" class="nav-link">
               <i class="nav-icon fas fa-box-open"></i>
@@ -147,7 +140,25 @@
                 
           </li>
           </ul>
-          
+          <li class="nav-header">Akun</li>
+        <li class="nav-item">
+            <a href="/admin/pengaturan_akun" class="nav-link">
+              <i class="nav-icon fas fa-user-cog"></i>
+              <p>
+                Pengaturan Akun
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/log" class="nav-link">
+              <i class="nav-icon fas fa-history"></i>
+              <p>
+                Log Pengguna
+                
+              </p>
+            </a>
+          </li>
 
 
 
@@ -212,8 +223,9 @@
                       <th>Tanggal</th>
                       <th>Nama Barang</th>
                       <th>Jumlah</th>
-                      <th>Harga</th>
-                    
+                      <th>Harga Satuan</th>
+                      <th>Total Harga</th>
+                      <th>Penanggung Jawab</th>
                       <th>Action</th>
                     </tr>
                     </thead>
@@ -224,7 +236,9 @@
                       <td>{{ $d->date }}</td>
                       <td>{{ $d->name }}</td>
                       <td>{{ $d->quantity }}</td>
+                      <td>{{ $d->price_per_item }}</td>
                       <td>{{ $d->price }}</td>
+                      <td>{{ $d->person_in_charge }}</td>
                      
                       <td style="text-align: center;">
                       <button class="btn btn-info" data-toggle="modal"  id="btnEdit-{{ $d->id }}"
@@ -341,7 +355,17 @@
                                       value= "{{ $d->quantity }}" required>
                                      
                                     </div>
-                                  
+                                    <div class="form-group" 
+                                    @error('pic') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                                      <label for="pic"><span class="fas fa-user"></span> Nama Penanggung Jawab</label>
+                                      <input type="text" class="form-control" id="pic" name="pic" placeholder="Masukkan nama penanggung jawab." 
+                                      value= "{{ old('pic') !== null ?  old('pic') : "$d->person_in_charge" }}" required>
+                                      <span class="text-danger">
+                                        @error('pic')
+                                          {{ $message }}
+                                        @enderror
+                                      </span>
+                                    </div>
                           
                                     <small><p>Dengan mengedit data, data mutasi barang masuk dan jumlah stock barang terkait akan terupdate.</p></small>
                               <div class="modal-footer">
@@ -433,7 +457,18 @@
                         @enderror
                       </span>
                     </div>
-                    
+                    <div class="form-group" 
+                                    @error('pic') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                                      <label for="pic"><span class="fas fa-user"></span> Nama Penanggung Jawab</label>
+                                      <input type="text" class="form-control" id="pic" name="pic" placeholder="Masukkan nama penanggung jawab." 
+                                      value= "{{ old('pic') }}" required>
+                                      <span class="text-danger">
+                                        @error('pic')
+                                          {{ $message }}
+                                        @enderror
+                                      </span>
+                                    </div>
+              
               
                     <small><p>Dengan menambahkan data, data mutasi barang masuk akan ter-generate dan jumlah stock barang terkait akan terupdate.</p></small>
                  

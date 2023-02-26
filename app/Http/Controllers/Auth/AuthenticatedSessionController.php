@@ -45,7 +45,7 @@ class AuthenticatedSessionController extends Controller
 
             if (auth()->user()->role_id === 1) {
                 // jika user superadmin
-                return redirect()->intended('/superadmin/home')->with('successLogin', 'Welcome to Sistem Informasi Manajemen Inventaris (SIMI)!');
+                return redirect()->intended('/superadmin/home')->with('successLogin', 'Selamat datang di Sistem Informasi Manajemen Inventaris (SIMI), '.Auth::user()->name.'!');
             } else if(auth()->user()->role_id === 2) {
                 // jika user pegawai
                 return redirect()->intended('/admin/home');

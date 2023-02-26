@@ -18,6 +18,7 @@ class AviasiPurchase extends Model
         'date',
         'name',
         'quantity',
+        'price_per_item',
         'price',
         'aviasi_stock_id',
     ];

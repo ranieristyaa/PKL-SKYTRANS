@@ -39,7 +39,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          
+               <li class="nav-header">Home</li>
           <li class="nav-item">
             <a href="/admin/home" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
@@ -48,7 +48,7 @@
                 
               </p>
             </a>
-          </li>
+            <li class="nav-header">Kelola Data</li>
           <li class="nav-item">
             <a href="/admin/dataadmin" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
@@ -147,7 +147,25 @@
                
           </li>
           </ul>
-          
+          <li class="nav-header">Akun</li>
+        <li class="nav-item">
+            <a href="/admin/pengaturan_akun" class="nav-link">
+              <i class="nav-icon fas fa-user-cog"></i>
+              <p>
+                Pengaturan Akun
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/log" class="nav-link">
+              <i class="nav-icon fas fa-history"></i>
+              <p>
+                Log Pengguna
+                
+              </p>
+            </a>
+          </li>
 
 
 
@@ -213,6 +231,7 @@
                       <th>Keterangan</th>
                       <th>Barang Masuk</th>
                       <th>Barang Keluar</th>
+                      <th>Penanggung Jawab</th>
                       <th>Action</th>
                     </tr>
                     </thead>
@@ -225,6 +244,7 @@
                       <td>{{ $d->description }}</td>
                       <td>{{ $d->item_in }}</td>
                       <td>{{ $d->item_out }}</td>
+                      <td>{{ $d->person_in_charge }}</td>
                       <td style="text-align: center;">
                       <button class="btn btn-info" data-toggle="modal"  id="btnEdit-{{ $d->id }}"
                       data-target="modal-edit-{{ $d->id }}" style="font-size: 0.8rem; padding: 0.2rem 0.75rem;"><span><i class="fas fa-edit"></i></span>  Edit</button>
@@ -299,7 +319,7 @@
                                     </div>
                                     <div class="form-group" 
                                     @error('name') style="border: 1px solid rgb(255, 0, 0)" @enderror>
-                                      <label for="name"><span class="fas fa-user"></span> Nama Barang</label>
+                                      <label for="name"><span class="fas fa-box"></span> Nama Barang</label>
                                       <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama barang" 
                                       value= "{{ old('name') !== null ?  old('name') : "$d->name" }}" required>
                                       <span class="text-danger">
@@ -342,7 +362,17 @@
                                         @enderror
                                       </span>
                                     </div>
-                                    
+                                    <div class="form-group" 
+                                    @error('pic') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                                      <label for="pic"><span class="fas fa-user"></span> Nama Penanggung Jawab</label>
+                                      <input type="text" class="form-control" id="pic" name="pic" placeholder="Masukkan nama penanggung jawab." 
+                                      value= "{{ old('pic') }}" required>
+                                      <span class="text-danger">
+                                        @error('pic')
+                                          {{ $message }}
+                                        @enderror
+                                      </span>
+                                    </div>
                                   
                                     <small><p>Dengan mengedit data, data pembelian barang terkait dan jumlah stock barang akan terupdate.</p></small>
                             
@@ -381,7 +411,97 @@
         </div>
         
             <!-- Modal Add -->
-   
+            <div class="modal fade" id="ModalAdd" tabindex="-1" aria-labelledby="titleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titleModalLabel">Tambah Barang Mutasi Aviasi</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                                                  aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                </div>
+                <div class="modal-body">
+						<form action="/admin/mutasi/migas" name="modal_popup" enctype="multipart/form-data" method="post">
+                    @csrf
+                    <div class="form-group"  
+                    @error('date') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                      <label for="date"><span class="fas fa-pencil-alt"></span> Tanggal</label>
+                      <input type="date" class="form-control" id="date" name="date" placeholder="Masukkan Tanggal" value="{{ old('date') }}" required>
+                      <span class="text-danger">
+                        @error('')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                    <div class="form-group" 
+                    @error('name') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                      <label for="name"><span class="fas fa-box"></span> Nama Barang</label>
+                      <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama barang" value="{{ old('name') }}" required>
+                      <span class="text-danger">
+                        @error('name')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                    <div class="form-group"  
+                    @error('description') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                      <label for="description"><span class="fas fa-pencil-alt"></span> Keterangan</label>
+                      <input type="description" class="form-control" id="description" name="description" placeholder="Masukkan keterangan" value="{{ old('description') }}" >
+                      <span class="text-danger">
+                        @error('description')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+          
+                    <div class="form-group"
+                    @error('item_in') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                      <label for="item_in"><span class="fas fa-calculator"></span> Jumlah Barang Masuk</label>
+                      <input type="number"  class="form-control" id="item_in" name="item_in" placeholder="Masukkan jumlah" value="{{ old('item_in') }}" required >
+                      <span class="text-danger">
+                        @error('item_in')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                    <div class="form-group"
+                    @error('item_out') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                      <label for="item_out"><span class="fas fa-calculator"></span> Jumlah Barang Keluar</label>
+                      <input type="number"  class="form-control" id="item_out" name="item_out" placeholder="Masukkan jumlah" value="{{ old('item_out') }}" required >
+                      <span class="text-danger">
+                        @error('item_out')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                    <div class="form-group" 
+                                    @error('pic') style="border: 1px solid rgb(255, 0, 0)" @enderror>
+                                      <label for="pic"><span class="fas fa-user"></span> Nama Penanggung Jawab</label>
+                                      <input type="text" class="form-control" id="pic" name="pic" placeholder="Masukkan nama penanggung jawab." 
+                                      value= "{{ old('pic') }}" required>
+                                      <span class="text-danger">
+                                        @error('pic')
+                                          {{ $message }}
+                                        @enderror
+                                      </span>
+                                    </div>
+                  
+              <small><p>Dengan menambahkan data, jumlah stock barang terkait akan terupdate.</p></small>
+						
+							<div class="modal-footer">
+								<button class="btn btn-success" type="submit">
+									Add
+								</button>
+								<button type="reset" class="btn btn-danger"  data-dismiss="modal" aria-hidden="true">
+									Cancel
+								</button>
+							</div>
+						</form>
+					</div>
+            </div>
+        </div>
+    </div>
 
  
 </div>

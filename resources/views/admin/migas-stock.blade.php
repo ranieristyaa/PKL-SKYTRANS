@@ -39,9 +39,9 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          
+               <li class="nav-header">Home</li>
           <li class="nav-item">
-            <a href="/admin/home" class="nav-link ">
+            <a href="/admin/home" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Dashboard
@@ -49,9 +49,8 @@
               </p>
             </a>
           </li>
-
-
-
+          <li class="nav-header">Kelola Data</li>
+          
           <li class="nav-item menu-open">
             <a href="" class="nav-link active">
               <i class="nav-icon fas fa-box-open"></i>
@@ -61,8 +60,8 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/stock/aviasi" class="nav-link " >
+              <li class="nav-item ">
+                <a href="/admin/stock/aviasi" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Aviasi</p>
                 </a>
@@ -76,7 +75,6 @@
               
             </ul>
           </li>
-          
           <li class="nav-item">
             <a href="/admin/rental" class="nav-link">
               <i class="nav-icon fas fa-clipboard-list"></i>
@@ -116,9 +114,6 @@
 
         </ul>
           </li>
-          
-         
-
           <li class="nav-item">
             <a href="" class="nav-link">
               <i class="nav-icon fas fa-exchange-alt"></i>
@@ -138,26 +133,35 @@
                 <a href="/admin/mutasi/migas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Migas
-                 
+                  
                   </p>
                   
                 </a>
-                
+               
           </li>
-          
-          
-
-
-        </ul>
+          </ul>
+          <li class="nav-header">Akun</li>
         <li class="nav-item">
-          <a href="" class="nav-link">
-              <i class="nav-icon fas fa-ellipsis-h"></i>
+            <a href="/admin/pengaturan_akun" class="nav-link">
+              <i class="nav-icon fas fa-user-cog"></i>
               <p>
-              Proyek Migas
-                <i class="fas fa-angle-left right"></i>
+                Pengaturan Akun
+                
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/admin/log" class="nav-link">
+              <i class="nav-icon fas fa-history"></i>
+              <p>
+                Log Pengguna
+                
+              </p>
+            </a>
+          </li>
+
+
+       
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -304,11 +308,11 @@
                                               </button>
                 </div>
                 <div class="modal-body">
-                <form action="/superadmin/stock/migas" name="modal_popup" enctype="multipart/form-data" method="post">
+                <form action="/admin/stock/migas" name="modal_popup" enctype="multipart/form-data" method="post">
                     @csrf
                     <div class="form-group" 
                     @error('name') style="border: 1px solid rgb(255, 0, 0)" @enderror>
-                      <label for="name"><span class="fas fa-user"></span> Nama Barang</label>
+                      <label for="name"><span class="fas fa-box"></span> Nama Barang</label>
                       <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama barang" value="{{ old('name') }}" required>
                       <span class="text-danger">
                         @error('name')

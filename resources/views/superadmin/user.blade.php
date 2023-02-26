@@ -39,7 +39,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          
+               <li class="nav-header">Home</li>
           <li class="nav-item">
             <a href="/superadmin/home" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
@@ -49,6 +49,7 @@
               </p>
             </a>
           </li>
+          <li class="nav-header">Kelola Data</li>
           <li class="nav-item">
             <a href="/superadmin/dataadmin" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
@@ -147,7 +148,25 @@
                 
           </li>
           </ul>
-          
+          <li class="nav-header">Akun</li>
+        <li class="nav-item">
+            <a href="/superadmin/pengaturan_akun" class="nav-link">
+              <i class="nav-icon fas fa-user-cog"></i>
+              <p>
+                Pengaturan Akun
+                
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/superadmin/log" class="nav-link">
+              <i class="nav-icon fas fa-history"></i>
+              <p>
+                Log Pengguna
+                
+              </p>
+            </a>
+          </li>
 
 
         
@@ -307,7 +326,7 @@
                                               <div class="form-group"
                                               @error('role') style="border: 1px solid rgb(255, 0, 0)" @enderror>
                                                 <label for="role_id"><span class="fas fa-users"></span> Role</label><br>
-                                                <select name="role_id" id="role" class="form-control" style="width: 466px;" required>
+                                                <select name="role_id" id="role" class="form-control" style="width: 466px; margin-left:0;"  required>
                                                   <option value="" disabled selected>Choose role</option>
                                                   <option value="1" {{ $d->role_id == '1' ? 'selected' : '' }}>super admin</option>
                                                   <option value="2" {{ $d->role_id == '2' ? 'selected' : '' }}>admin</option>
@@ -412,7 +431,7 @@
                     <div class="form-group"
                     @error('role') style="border: 1px solid rgb(255, 0, 0)" @enderror>
                       <label for="role_id"><span class="fas fa-users"></span> Role</label><br>
-                      <select name="role_id" id="role" class="form-control" style="width: 466px;" required>
+                      <select name="role_id" id="role" class="form-control" style="width: 466px; margin-left:0;" required>
                         <option value="" disabled selected>Choose role</option>
                         <option value="1" {{ old('role_id') == '1' ? 'selected' : '' }}>super admin</option>
                         <option value="2" {{ old('role_id') == '2' ? 'selected' : '' }}>admin</option>

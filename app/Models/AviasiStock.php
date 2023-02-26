@@ -41,7 +41,15 @@ class AviasiStock extends Model
     }
 
     public function getDescriptionForEvent(string $eventName): string{
-        return "'$this->name'" . " {$eventName} by: " . Auth::user()->name;
+        if ($eventName == "created"){
+            $event = "dibuat";
+        }else if($eventName == "deleted"){
+            $event = "dihapus";
+        }else if($eventName == "updated"){
+            $event = "diperbarui";
+        }
+
+        return "'$this->name'" . " {$event} oleh: " . Auth::user()->name;
     }
 
     public function AviasiPurchase()

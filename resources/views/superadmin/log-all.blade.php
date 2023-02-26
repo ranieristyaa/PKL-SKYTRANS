@@ -160,7 +160,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/superadmin/log" class="nav-link active">
+            <a href="/superadmin/log" class="nav-link ">
               <i class="nav-icon fas fa-history"></i>
               <p>
                 Log Pengguna
@@ -183,12 +183,12 @@
           <div class="col-sm-6">
             <h1>
           <i class="fas fa-history"></i>
-            <span>Log Aktivitas {{ auth()->user()->name }}</span></h1>
+            <span>Log Aktivitas Semua User</span></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#"><i class="fas fa-user"></i></a></li>
-              <li class="breadcrumb-item active">Log Aktivitas</li>
+              <li class="breadcrumb-item active">Log Aktivitas Semua User</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -275,14 +275,14 @@
           buttons: [
             {
             extend: 'print',
-            title: 'Log Pengguna',
+            title: 'Log Semua User',
               text: '<span><i class="fas fa-print"></i></span>  Print',
             
           },
           {
               extend: 'excel',
               
-              title: 'Log Pengguna',
+              title: 'Log Semua User',
               text: '<span><i class="fas fa-download"></i></span>  Download as Excel',
              
           }
